@@ -1,4 +1,4 @@
-import { CheckCircle, Code, Send } from 'lucide-react';
+import { CheckCircle, Code } from 'lucide-react';
 import { Metadata } from 'next';
 
 import Footer from '@components/Footer';
@@ -304,8 +304,42 @@ export default function CareersPage() {
                         </div>
                         <div className="pb-8">
                           <h3 className="font-semibold text-gray-900 text-sm">{step.title}</h3>
-                          <p className="text-gray-500 text-sm mt-1 leading-relaxed">
-                            {index === 2 ? (
+                          <div className="text-gray-500 text-sm mt-1 leading-relaxed">
+                            {index === 0 ? (
+                              <>
+                                <p className="mb-2">
+                                  We kindly ask you to spin up Archestra before the interview and give it a look.
+                                  We&apos;ll discuss it on the call!
+                                </p>
+                                <ol className="list-decimal pl-4 space-y-1">
+                                  <li>
+                                    Install{' '}
+                                    <a
+                                      href="https://github.com/archestra-ai/archestra"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-indigo-600 hover:underline"
+                                    >
+                                      Archestra
+                                    </a>
+                                    .
+                                  </li>
+                                  <li>
+                                    Install the{' '}
+                                    <a
+                                      href="/mcp-catalog/matvey-kuk__archestra-work-at-mcp"
+                                      className="text-indigo-600 hover:underline"
+                                    >
+                                      &ldquo;Work at Archestra&rdquo;
+                                    </a>{' '}
+                                    MCP server from the catalog.
+                                  </li>
+                                  <li>
+                                    Instruct it to <span className="font-mono">&ldquo;apply&rdquo;</span>.
+                                  </li>
+                                </ol>
+                              </>
+                            ) : index === 2 ? (
                               <>
                                 Make a contribution to our{' '}
                                 <a
@@ -322,18 +356,7 @@ export default function CareersPage() {
                             ) : (
                               step.description
                             )}
-                          </p>
-                          {index === 0 && (
-                            <a
-                              href="https://forms.gle/LdADkJmYApjcPHbt9"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-sm font-medium hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md shadow-indigo-200 hover:shadow-lg hover:shadow-indigo-300"
-                            >
-                              <Send className="h-3.5 w-3.5" />
-                              Apply Now
-                            </a>
-                          )}
+                          </div>
                         </div>
                       </div>
                     );
