@@ -23,10 +23,13 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 w-full max-w-[1320px] items-center gap-6 px-5 sm:px-8 lg:px-14">
         <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
-          <div className="relative h-[26px] w-[26px] shrink-0">
+          <div className="relative h-[28px] w-[28px] shrink-0">
             <Image src={websiteUrls.logoRelativeUrl} alt={`${companyName} Logo`} fill className="object-contain" />
           </div>
-          <span className="hidden lg:inline font-mono text-[15px] font-medium tracking-tight text-gray-900">
+          <span
+            className="hidden lg:inline font-mono text-[17px] font-medium text-gray-900"
+            style={{ letterSpacing: '-0.015em' }}
+          >
             Archestra<span className="text-gray-400">.AI</span>
           </span>
         </Link>

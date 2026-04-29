@@ -167,17 +167,17 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
       </div>
 
       {/* Desktop Sidebar - Only visible on large screens */}
-      <aside className="hidden lg:block w-64 flex-shrink-0">
-        <div className="sticky top-20">
-          <nav className="space-y-4 pb-8">
+      <aside className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto border-r border-gray-200 pl-5 pr-4 sm:pl-8 lg:pl-14 pt-4 pb-8 self-start">
+        <div>
+          <nav className="flex flex-col gap-3 pb-8">
             {/* Desktop Categories */}
             {categories.map((category) => {
               const isActive = isActiveCategory(category);
 
               return (
-                <div key={category.slug} className="space-y-1">
+                <div key={category.slug} className="flex flex-col gap-1.5">
                   <div
-                    className={`flex items-center gap-2 px-3 py-2 text-sm font-medium ${
+                    className={`flex items-center gap-2.5 py-1 text-sm font-medium ${
                       isActive ? 'text-gray-900' : 'text-gray-700'
                     }`}
                   >
@@ -185,7 +185,7 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
                     <span>{category.name}</span>
                   </div>
 
-                  <div className="ml-6 space-y-1">
+                  <div className="ml-6 flex flex-col gap-0.5">
                     {/* Direct docs */}
                     {category.docs.map((doc) => {
                       const isDocActive = isActiveDoc(doc.slug);
@@ -194,7 +194,7 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
                         <Link
                           key={doc.slug}
                           href={`/docs/${doc.slug}`}
-                          className={`block px-3 py-1.5 text-sm rounded-md transition-colors ${
+                          className={`block px-3 py-1 text-sm rounded-md transition-colors ${
                             isDocActive
                               ? 'bg-blue-50 text-blue-700 font-medium'
                               : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
@@ -207,33 +207,27 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
 
                     {/* Subcategories */}
                     {category.subcategories?.map((subcategory) => (
-                      <div key={subcategory.name} className="mt-4">
-                        <div className="px-3 py-1 flex items-center gap-2">
-                          <span className="text-gray-400 text-xs">——</span>
-                          <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                            {subcategory.name}
-                          </span>
-                          <span className="text-gray-400 text-xs">——</span>
+                      <div key={subcategory.name} className="mt-3 flex flex-col gap-0.5">
+                        <div className="px-3 pt-1 pb-1 text-[10px] font-semibold text-gray-400 uppercase tracking-[0.1em] whitespace-nowrap">
+                          {subcategory.name}
                         </div>
-                        <div className="space-y-1">
-                          {subcategory.docs.map((doc) => {
-                            const isDocActive = isActiveDoc(doc.slug);
+                        {subcategory.docs.map((doc) => {
+                          const isDocActive = isActiveDoc(doc.slug);
 
-                            return (
-                              <Link
-                                key={doc.slug}
-                                href={`/docs/${doc.slug}`}
-                                className={`block px-3 py-1.5 text-sm rounded-md transition-colors ${
-                                  isDocActive
-                                    ? 'bg-blue-50 text-blue-700 font-medium'
-                                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                                }`}
-                              >
-                                {doc.title}
-                              </Link>
-                            );
-                          })}
-                        </div>
+                          return (
+                            <Link
+                              key={doc.slug}
+                              href={`/docs/${doc.slug}`}
+                              className={`block px-3 py-1 text-sm rounded-md transition-colors ${
+                                isDocActive
+                                  ? 'bg-blue-50 text-blue-700 font-medium'
+                                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                              }`}
+                            >
+                              {doc.title}
+                            </Link>
+                          );
+                        })}
                       </div>
                     ))}
                   </div>

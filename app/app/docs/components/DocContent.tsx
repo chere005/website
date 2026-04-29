@@ -11,8 +11,6 @@ import rehypeSlug from 'rehype-slug';
 import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 
-import { Button } from '@components/ui/button';
-
 // Dynamically import SwaggerUI to avoid SSR issues
 const SwaggerUI = dynamic(() => import('./SwaggerUI'), {
   ssr: false,
@@ -97,18 +95,20 @@ function CodeBlock({ children, className }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative group my-6">
-      <div className="overflow-x-auto rounded-lg bg-gray-50">
-        <pre className={className || 'p-4 text-sm whitespace-pre'}>{children}</pre>
+    <div className="my-6 overflow-hidden rounded-md border border-gray-200 bg-gray-50">
+      <div className="flex items-center justify-end border-b border-gray-200 px-2 py-1">
+        <button
+          type="button"
+          onClick={copyToClipboard}
+          className="inline-flex items-center justify-center h-6 w-6 rounded text-gray-400 hover:text-gray-700 transition-colors"
+          aria-label="Copy code"
+        >
+          {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+        </button>
       </div>
-      <Button
-        variant="outline"
-        size="sm"
-        className="absolute top-2 right-2 h-7 w-7 p-0 bg-white hover:bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity z-10"
-        onClick={copyToClipboard}
-      >
-        {copied ? <Check className="h-3 w-3 text-green-600" /> : <Copy className="h-3 w-3" />}
-      </Button>
+      <div className="overflow-x-auto">
+        <pre className={`${className ?? ''} px-4 py-3.5 text-[12.5px] leading-[1.6] whitespace-pre`}>{children}</pre>
+      </div>
     </div>
   );
 }
