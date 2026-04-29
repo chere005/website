@@ -324,16 +324,7 @@ export default function CareersPage() {
                                     </a>
                                     .
                                   </li>
-                                  <li>
-                                    Install the{' '}
-                                    <a
-                                      href="/mcp-catalog/matvey-kuk__archestra-work-at-mcp"
-                                      className="text-indigo-600 hover:underline"
-                                    >
-                                      &ldquo;Work at Archestra&rdquo;
-                                    </a>{' '}
-                                    MCP server from the catalog.
-                                  </li>
+                                  <li>Install the &ldquo;Work at Archestra&rdquo; MCP server from the catalog.</li>
                                   <li>
                                     Instruct it to <span className="font-mono">&ldquo;apply&rdquo;</span>.
                                   </li>
