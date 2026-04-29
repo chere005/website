@@ -54,7 +54,7 @@ export default function Header() {
             Careers
           </Link>
           <Link
-            href="/community-stream"
+            href="/community-stream/general"
             className="text-sm text-gray-500 hover:text-gray-900 transition-colors flex items-center gap-1.5"
           >
             Community
@@ -128,7 +128,7 @@ export default function Header() {
               Careers
             </Link>
             <Link
-              href="/community-stream"
+              href="/community-stream/general"
               className="px-3 py-2 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors flex items-center gap-1.5"
               onClick={() => setIsMobileMenuOpen(false)}
             >

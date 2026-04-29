@@ -3,6 +3,7 @@
 import { Check, Copy, Link as LinkIcon } from 'lucide-react';
 import mermaid from 'mermaid';
 import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
@@ -32,6 +33,25 @@ interface CodeBlockProps {
 
 interface MermaidProps {
   chart: string;
+}
+
+function findFirstTextMatch(root: HTMLElement, query: string): { node: Text; idx: number } | undefined {
+  const lower = query.toLowerCase();
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => {
+      const parent = n.parentElement;
+      if (!parent) return NodeFilter.FILTER_REJECT;
+      if (parent.closest('mark')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    },
+  });
+  let node: Node | null;
+  while ((node = walker.nextNode())) {
+    const text = node as Text;
+    const idx = (text.nodeValue ?? '').toLowerCase().indexOf(lower);
+    if (idx !== -1) return { node: text, idx };
+  }
+  return undefined;
 }
 
 function Mermaid({ chart }: MermaidProps) {
@@ -114,6 +134,9 @@ function CodeBlock({ children, className }: CodeBlockProps) {
 }
 
 export default function DocContent({ content }: DocContentProps) {
+  const searchParams = useSearchParams();
+  const proseRef = useRef<HTMLDivElement>(null);
+
   // Check if content contains the swagger-ui directive
   const hasSwaggerUI = content.includes(':::swagger-ui');
 
@@ -181,6 +204,34 @@ export default function DocContent({ content }: DocContentProps) {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  useEffect(() => {
+    const q = searchParams?.get('q');
+    if (!q || !proseRef.current) return;
+    const root = proseRef.current;
+
+    let attempts = 0;
+    const tryHighlight = () => {
+      const target = findFirstTextMatch(root, q);
+      if (!target) {
+        if (attempts++ < 10) setTimeout(tryHighlight, 100);
+        return;
+      }
+      const { node, idx } = target;
+      const after = node.splitText(idx);
+      after.splitText(q.length);
+      const mark = document.createElement('mark');
+      mark.className = 'bg-yellow-200 rounded px-0.5 transition-colors';
+      mark.textContent = after.nodeValue;
+      after.parentNode?.replaceChild(mark, after);
+      mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => {
+        mark.classList.add('bg-transparent');
+        mark.classList.remove('bg-yellow-200');
+      }, 2500);
+    };
+    tryHighlight();
+  }, [searchParams, content]);
+
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -200,7 +251,7 @@ export default function DocContent({ content }: DocContentProps) {
   };
 
   return (
-    <div className="prose prose-lg max-w-none">
+    <div ref={proseRef} className="prose prose-lg max-w-none">
       {/* Render the markdown content */}
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkBreaks]}
