@@ -107,56 +107,77 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
                     </div>
 
                     <div className="">
-                      {/* Direct docs */}
-                      {category.docs.map((doc) => {
-                        const isDocActive = isActiveDoc(doc.slug);
+                      {/* Direct docs (skip ones whose title matches a subcategory — those render as subcategory parents below) */}
+                      {category.docs
+                        .filter((doc) => !category.subcategories?.some((sc) => sc.name === doc.title))
+                        .map((doc) => {
+                          const isDocActive = isActiveDoc(doc.slug);
+
+                          return (
+                            <Link
+                              key={doc.slug}
+                              href={`/docs/${doc.slug}`}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className={`block pl-10 pr-4 py-2 text-sm transition-colors ${
+                                isDocActive
+                                  ? 'bg-blue-50 text-blue-700 font-medium'
+                                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                              }`}
+                            >
+                              {doc.title}
+                            </Link>
+                          );
+                        })}
+
+                      {/* Subcategories — if a sibling doc shares the subcategory name, render that doc as the parent link */}
+                      {category.subcategories?.map((subcategory) => {
+                        const parentDoc = category.docs.find((d) => d.title === subcategory.name);
+                        const isParentActive = parentDoc ? isActiveDoc(parentDoc.slug) : false;
 
                         return (
-                          <Link
-                            key={doc.slug}
-                            href={`/docs/${doc.slug}`}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className={`block pl-10 pr-4 py-2 text-sm transition-colors ${
-                              isDocActive
-                                ? 'bg-blue-50 text-blue-700 font-medium'
-                                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                            }`}
-                          >
-                            {doc.title}
-                          </Link>
-                        );
-                      })}
-
-                      {/* Subcategories */}
-                      {category.subcategories?.map((subcategory) => (
-                        <div key={subcategory.name} className="mt-4">
-                          <div className="pl-10 pr-4 py-1 flex items-center gap-2">
-                            <span className="text-gray-400">——</span>
-                            <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                              {subcategory.name}
-                            </span>
-                            <span className="text-gray-400">——</span>
-                          </div>
-                          {subcategory.docs.map((doc) => {
-                            const isDocActive = isActiveDoc(doc.slug);
-
-                            return (
+                          <div key={subcategory.name} className="mt-2">
+                            {parentDoc ? (
                               <Link
-                                key={doc.slug}
-                                href={`/docs/${doc.slug}`}
+                                href={`/docs/${parentDoc.slug}`}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className={`block pl-10 pr-4 py-2 text-sm transition-colors ${
-                                  isDocActive
+                                  isParentActive
                                     ? 'bg-blue-50 text-blue-700 font-medium'
                                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                                 }`}
                               >
-                                {doc.title}
+                                {parentDoc.title}
                               </Link>
-                            );
-                          })}
-                        </div>
-                      ))}
+                            ) : (
+                              <div className="pl-10 pr-4 py-1 flex items-center gap-2">
+                                <span className="text-gray-400">——</span>
+                                <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                                  {subcategory.name}
+                                </span>
+                                <span className="text-gray-400">——</span>
+                              </div>
+                            )}
+                            {subcategory.docs.map((doc) => {
+                              const isDocActive = isActiveDoc(doc.slug);
+
+                              return (
+                                <Link
+                                  key={doc.slug}
+                                  href={`/docs/${doc.slug}`}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className={`block pl-16 pr-4 py-2 text-sm transition-colors ${
+                                    isDocActive
+                                      ? 'bg-blue-50 text-blue-700 font-medium'
+                                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                  }`}
+                                >
+                                  {doc.title}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 );
@@ -186,50 +207,70 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
                   </div>
 
                   <div className="ml-6 flex flex-col gap-0.5">
-                    {/* Direct docs */}
-                    {category.docs.map((doc) => {
-                      const isDocActive = isActiveDoc(doc.slug);
+                    {/* Direct docs (skip ones whose title matches a subcategory — those render as subcategory parents below) */}
+                    {category.docs
+                      .filter((doc) => !category.subcategories?.some((sc) => sc.name === doc.title))
+                      .map((doc) => {
+                        const isDocActive = isActiveDoc(doc.slug);
+
+                        return (
+                          <Link
+                            key={doc.slug}
+                            href={`/docs/${doc.slug}`}
+                            className={`block px-3 py-1 text-sm rounded-md transition-colors ${
+                              isDocActive
+                                ? 'bg-blue-50 text-blue-700 font-medium'
+                                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                            }`}
+                          >
+                            {doc.title}
+                          </Link>
+                        );
+                      })}
+
+                    {/* Subcategories — if a sibling doc shares the subcategory name, render that doc as the parent link */}
+                    {category.subcategories?.map((subcategory) => {
+                      const parentDoc = category.docs.find((d) => d.title === subcategory.name);
+                      const isParentActive = parentDoc ? isActiveDoc(parentDoc.slug) : false;
 
                       return (
-                        <Link
-                          key={doc.slug}
-                          href={`/docs/${doc.slug}`}
-                          className={`block px-3 py-1 text-sm rounded-md transition-colors ${
-                            isDocActive
-                              ? 'bg-blue-50 text-blue-700 font-medium'
-                              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                          }`}
-                        >
-                          {doc.title}
-                        </Link>
-                      );
-                    })}
-
-                    {/* Subcategories */}
-                    {category.subcategories?.map((subcategory) => (
-                      <div key={subcategory.name} className="mt-3 flex flex-col gap-0.5">
-                        <div className="px-3 pt-1 pb-1 text-[10px] font-semibold text-gray-400 uppercase tracking-[0.1em] whitespace-nowrap">
-                          {subcategory.name}
-                        </div>
-                        {subcategory.docs.map((doc) => {
-                          const isDocActive = isActiveDoc(doc.slug);
-
-                          return (
+                        <div key={subcategory.name} className="flex flex-col gap-0.5">
+                          {parentDoc ? (
                             <Link
-                              key={doc.slug}
-                              href={`/docs/${doc.slug}`}
+                              href={`/docs/${parentDoc.slug}`}
                               className={`block px-3 py-1 text-sm rounded-md transition-colors ${
-                                isDocActive
+                                isParentActive
                                   ? 'bg-blue-50 text-blue-700 font-medium'
                                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                               }`}
                             >
-                              {doc.title}
+                              {parentDoc.title}
                             </Link>
-                          );
-                        })}
-                      </div>
-                    ))}
+                          ) : (
+                            <div className="px-3 pt-2 pb-1 text-[10px] font-semibold text-gray-400 uppercase tracking-[0.1em] whitespace-nowrap">
+                              {subcategory.name}
+                            </div>
+                          )}
+                          {subcategory.docs.map((doc) => {
+                            const isDocActive = isActiveDoc(doc.slug);
+
+                            return (
+                              <Link
+                                key={doc.slug}
+                                href={`/docs/${doc.slug}`}
+                                className={`block ml-4 px-3 py-1 text-sm rounded-md transition-colors ${
+                                  isDocActive
+                                    ? 'bg-blue-50 text-blue-700 font-medium'
+                                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                }`}
+                              >
+                                {doc.title}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               );
