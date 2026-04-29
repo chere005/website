@@ -3,7 +3,6 @@ import { ChevronLeft, ChevronRight, Clock, Edit } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
 
 import Footer from '@components/Footer';
 import Header from '@components/Header';
@@ -11,6 +10,7 @@ import constants from '@constants';
 
 import DocContent from '../components/DocContent';
 import DocsSidebar from '../components/DocsSidebar';
+import TableOfContents from '../components/TableOfContents';
 import { buildDocMetadata, generateTableOfContents, getAllDocs, getDocBySlug, getDocsByCategory } from '../utils';
 
 const {
@@ -135,39 +135,7 @@ export default async function DocPage({ params }: Props) {
 
           {/* Table of Contents - Right Sidebar */}
           <aside className="hidden xl:block sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto border-l border-gray-200 self-start">
-            {toc.length > 0 && (
-              <div className="px-6 pt-4 pb-10">
-                <h3 className="text-[10px] font-semibold text-gray-400 uppercase tracking-[0.1em] mb-2 py-1">
-                  On this page
-                </h3>
-                <nav className="flex flex-col gap-0.5 pb-4">
-                  {toc.map((item) => (
-                    <a
-                      key={item.id}
-                      href={`#${item.id}`}
-                      className={`
-                        block w-full text-left py-1 text-sm transition-colors
-                        ${item.level === 2 ? 'pl-0' : 'pl-4'}
-                        text-gray-600 hover:text-gray-900 border-l border-transparent
-                      `}
-                    >
-                      <ReactMarkdown
-                        components={{
-                          p: ({ children }) => <>{children}</>,
-                          code: ({ children }) => (
-                            <code className="rounded bg-gray-100 px-1 py-0.5 font-mono text-[0.85em] text-gray-800">
-                              {children}
-                            </code>
-                          ),
-                        }}
-                      >
-                        {item.rawText}
-                      </ReactMarkdown>
-                    </a>
-                  ))}
-                </nav>
-              </div>
-            )}
+            <TableOfContents items={toc} />
           </aside>
         </div>
       </main>
