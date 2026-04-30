@@ -3,7 +3,8 @@
 import { Check, Copy, Link as LinkIcon } from 'lucide-react';
 import mermaid from 'mermaid';
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
@@ -32,6 +33,25 @@ interface CodeBlockProps {
 
 interface MermaidProps {
   chart: string;
+}
+
+function findFirstTextMatch(root: HTMLElement, query: string): { node: Text; idx: number } | undefined {
+  const lower = query.toLowerCase();
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => {
+      const parent = n.parentElement;
+      if (!parent) return NodeFilter.FILTER_REJECT;
+      if (parent.closest('mark')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    },
+  });
+  let node: Node | null;
+  while ((node = walker.nextNode())) {
+    const text = node as Text;
+    const idx = (text.nodeValue ?? '').toLowerCase().indexOf(lower);
+    if (idx !== -1) return { node: text, idx };
+  }
+  return undefined;
 }
 
 function Mermaid({ chart }: MermaidProps) {
@@ -113,7 +133,49 @@ function CodeBlock({ children, className }: CodeBlockProps) {
   );
 }
 
+function SearchHighlighter({
+  proseRef,
+  content,
+}: {
+  proseRef: React.RefObject<HTMLDivElement | null>;
+  content: string;
+}) {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const q = searchParams?.get('q');
+    if (!q || !proseRef.current) return;
+    const root = proseRef.current;
+
+    let attempts = 0;
+    const tryHighlight = () => {
+      const target = findFirstTextMatch(root, q);
+      if (!target) {
+        if (attempts++ < 10) setTimeout(tryHighlight, 100);
+        return;
+      }
+      const { node, idx } = target;
+      const after = node.splitText(idx);
+      after.splitText(q.length);
+      const mark = document.createElement('mark');
+      mark.className = 'bg-yellow-200 rounded px-0.5 transition-colors';
+      mark.textContent = after.nodeValue;
+      after.parentNode?.replaceChild(mark, after);
+      mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => {
+        mark.classList.add('bg-transparent');
+        mark.classList.remove('bg-yellow-200');
+      }, 2500);
+    };
+    tryHighlight();
+  }, [searchParams, content, proseRef]);
+
+  return null;
+}
+
 export default function DocContent({ content }: DocContentProps) {
+  const proseRef = useRef<HTMLDivElement>(null);
+
   // Check if content contains the swagger-ui directive
   const hasSwaggerUI = content.includes(':::swagger-ui');
 
@@ -200,17 +262,26 @@ export default function DocContent({ content }: DocContentProps) {
   };
 
   return (
-    <div className="prose prose-lg max-w-none">
+    <div
+      ref={proseRef}
+      className="prose max-w-none font-sans prose-code:font-mono prose-pre:font-mono text-[15px] leading-[1.72] text-gray-900"
+    >
+      <Suspense fallback={null}>
+        <SearchHighlighter proseRef={proseRef} content={content} />
+      </Suspense>
       {/* Render the markdown content */}
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkBreaks]}
         rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeSlug]}
         components={{
-          p: ({ node, ...props }) => <p {...props} className="text-gray-700 leading-relaxed mb-4" />,
+          p: ({ node, ...props }) => <p {...props} className="text-gray-900 leading-[1.72] mb-4" />,
           h1: ({ node, children, ...props }) => {
             const id = props.id || '';
             return (
-              <h1 {...props} className="text-3xl font-bold text-gray-900 mb-6 mt-10 group relative transition-colors">
+              <h1
+                {...props}
+                className="text-[28px] font-medium text-gray-900 mb-5 mt-10 tracking-[-0.018em] leading-[1.15] group relative transition-colors"
+              >
                 <a
                   href={`#${id}`}
                   className="absolute -left-8 top-1 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -228,7 +299,7 @@ export default function DocContent({ content }: DocContentProps) {
             return (
               <h2
                 {...props}
-                className="text-2xl font-bold text-gray-900 mb-4 mt-8 group relative scroll-mt-20 transition-colors"
+                className="text-[20px] font-semibold text-gray-900 mb-3 mt-14 tracking-[-0.012em] group relative scroll-mt-20 transition-colors"
               >
                 <a
                   href={`#${id}`}
@@ -247,7 +318,7 @@ export default function DocContent({ content }: DocContentProps) {
             return (
               <h3
                 {...props}
-                className="text-xl font-bold text-gray-900 mb-3 mt-6 group relative scroll-mt-20 transition-colors"
+                className="text-[15.5px] font-semibold text-gray-900 mb-1.5 mt-8 tracking-[-0.005em] group relative scroll-mt-20 transition-colors"
               >
                 <a
                   href={`#${id}`}
@@ -358,7 +429,10 @@ export default function DocContent({ content }: DocContentProps) {
               </code>
             ) : (
               // Inline code
-              <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono break-all" {...props}>
+              <code
+                className="bg-gray-50 px-1.5 py-px rounded-[3px] border border-gray-200 text-[12.5px] font-mono break-all"
+                {...props}
+              >
                 {children}
               </code>
             );
@@ -372,24 +446,26 @@ export default function DocContent({ content }: DocContentProps) {
           th: ({ node, ...props }) => (
             <th
               {...props}
-              className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider break-words"
+              className="px-3.5 py-2.5 text-left text-[10.5px] font-medium text-gray-500 uppercase tracking-[0.08em] break-words"
             />
           ),
-          td: ({ node, ...props }) => <td {...props} className="px-4 py-4 text-sm text-gray-900 break-words" />,
+          td: ({ node, ...props }) => <td {...props} className="px-3.5 py-2.5 text-[13px] text-gray-900 break-words" />,
           // Custom components for callouts
           div: ({ node, className, children, ...props }) => {
             if (className?.includes('callout')) {
               const type = className.split('-')[1] || 'info';
-              const styles = {
-                info: 'bg-blue-50 border-blue-200 text-blue-900',
-                warning: 'bg-yellow-50 border-yellow-200 text-yellow-900',
-                danger: 'bg-red-50 border-red-200 text-red-900',
-                success: 'bg-green-50 border-green-200 text-green-900',
+              const leftBorder = {
+                info: 'border-l-blue-600',
+                warning: 'border-l-yellow-500',
+                danger: 'border-l-red-500',
+                success: 'border-l-green-500',
               };
 
               return (
                 <div
-                  className={`p-4 my-4 border-l-4 rounded-r-lg ${styles[type as keyof typeof styles] || styles.info}`}
+                  className={`my-6 px-3.5 py-3 text-[13.5px] text-gray-900 border border-gray-200 border-l-2 rounded-[4px] bg-transparent ${
+                    leftBorder[type as keyof typeof leftBorder] || leftBorder.info
+                  }`}
                   {...props}
                 >
                   {children}

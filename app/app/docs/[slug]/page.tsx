@@ -68,11 +68,16 @@ export default async function DocPage({ params }: Props) {
           </div>
         </nav>
 
-        <header className="mb-8 pb-8 border-b border-gray-200">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{doc.title}</h1>
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
-            <span className="flex items-center gap-1">
-              <Clock className="h-4 w-4" />
+        <header className="mb-10 pb-8 border-b border-gray-200">
+          <h1 className="text-[32px] font-medium text-gray-900 mb-3.5 leading-[1.1] tracking-[-0.022em]">
+            {doc.title}
+          </h1>
+          {doc.description && (
+            <p className="text-base text-gray-600 leading-[1.55] mb-8 max-w-[62ch]">{doc.description}</p>
+          )}
+          <div className="flex flex-wrap items-center text-[13px] text-gray-600">
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-3.5 w-3.5" />
               {doc.readingTime}
             </span>
           </div>

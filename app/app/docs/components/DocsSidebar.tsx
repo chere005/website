@@ -19,7 +19,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-import { DocCategory } from '../types';
+import { DocCategory, DocPage, DocSubcategory } from '../types';
+import { DocsSearchTrigger } from './DocsSearch';
 
 interface DocsSidebarProps {
   categories: DocCategory[];
@@ -42,6 +43,35 @@ const categoryIcons: Record<string, React.ReactNode> = {
   Reference: <FileText className="h-4 w-4" />,
 };
 
+type SidebarItem =
+  | { kind: 'doc'; doc: DocPage; order: number }
+  | { kind: 'subcategory'; subcategory: DocSubcategory; parentDoc?: DocPage; order: number };
+
+// Build a single ordered list per category that interleaves direct docs and
+// subcategories. If a subcategory name matches a sibling direct doc's title,
+// that doc becomes the subcategory's parent link and is removed from the
+// direct-doc list. The subcategory inherits the parent doc's `order` so the
+// nested group appears at the parent's natural position.
+function buildSidebarItems(category: DocCategory): SidebarItem[] {
+  const subcategoryNames = new Set((category.subcategories ?? []).map((sc) => sc.name));
+
+  const directItems: SidebarItem[] = category.docs
+    .filter((doc) => !subcategoryNames.has(doc.title))
+    .map((doc) => ({ kind: 'doc' as const, doc, order: doc.order }));
+
+  const subcategoryItems: SidebarItem[] = (category.subcategories ?? []).map((subcategory) => {
+    const parentDoc = category.docs.find((d) => d.title === subcategory.name);
+    return {
+      kind: 'subcategory' as const,
+      subcategory,
+      parentDoc,
+      order: parentDoc?.order ?? Number.MAX_SAFE_INTEGER,
+    };
+  });
+
+  return [...directItems, ...subcategoryItems].sort((a, b) => a.order - b.order);
+}
+
 export default function DocsSidebar({ categories }: DocsSidebarProps) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -58,14 +88,10 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
   };
 
   const isActiveCategory = (category: DocCategory) => {
-    // Check direct docs
     const hasActiveDirectDoc = category.docs.some((doc) => isActiveDoc(doc.slug));
-
-    // Check subcategory docs
     const hasActiveSubcategoryDoc = category.subcategories?.some((subcategory) =>
       subcategory.docs.some((doc) => isActiveDoc(doc.slug))
     );
-
     return hasActiveDirectDoc || hasActiveSubcategoryDoc;
   };
 
@@ -73,6 +99,9 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
     <>
       {/* Mobile Menu Panel - Only visible on small screens */}
       <div className="block lg:hidden">
+        <div className="px-4 pt-3 pb-2">
+          <DocsSearchTrigger />
+        </div>
         <div className="sticky top-0 bg-white border-b border-gray-200 z-30">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -91,9 +120,9 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
           `}
           >
             <nav className="py-2">
-              {/* Mobile Categories */}
               {categories.map((category) => {
                 const isActive = isActiveCategory(category);
+                const items = buildSidebarItems(category);
 
                 return (
                   <div key={category.slug} className="">
@@ -106,17 +135,14 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
                       <span>{category.name}</span>
                     </div>
 
-                    <div className="">
-                      {/* Direct docs (skip ones whose title matches a subcategory — those render as subcategory parents below) */}
-                      {category.docs
-                        .filter((doc) => !category.subcategories?.some((sc) => sc.name === doc.title))
-                        .map((doc) => {
-                          const isDocActive = isActiveDoc(doc.slug);
-
+                    <div>
+                      {items.map((item) => {
+                        if (item.kind === 'doc') {
+                          const isDocActive = isActiveDoc(item.doc.slug);
                           return (
                             <Link
-                              key={doc.slug}
-                              href={`/docs/${doc.slug}`}
+                              key={item.doc.slug}
+                              href={`/docs/${item.doc.slug}`}
                               onClick={() => setIsMobileMenuOpen(false)}
                               className={`block pl-10 pr-4 py-2 text-sm transition-colors ${
                                 isDocActive
@@ -124,18 +150,16 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
                                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                               }`}
                             >
-                              {doc.title}
+                              {item.doc.title}
                             </Link>
                           );
-                        })}
+                        }
 
-                      {/* Subcategories — if a sibling doc shares the subcategory name, render that doc as the parent link */}
-                      {category.subcategories?.map((subcategory) => {
-                        const parentDoc = category.docs.find((d) => d.title === subcategory.name);
+                        const { subcategory, parentDoc } = item;
                         const isParentActive = parentDoc ? isActiveDoc(parentDoc.slug) : false;
 
                         return (
-                          <div key={subcategory.name} className="mt-2">
+                          <div key={subcategory.name}>
                             {parentDoc ? (
                               <Link
                                 href={`/docs/${parentDoc.slug}`}
@@ -149,17 +173,12 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
                                 {parentDoc.title}
                               </Link>
                             ) : (
-                              <div className="pl-10 pr-4 py-1 flex items-center gap-2">
-                                <span className="text-gray-400">——</span>
-                                <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                                  {subcategory.name}
-                                </span>
-                                <span className="text-gray-400">——</span>
+                              <div className="pl-10 pr-4 pt-3 pb-1 text-[10px] font-semibold text-gray-400 uppercase tracking-[0.1em] whitespace-nowrap">
+                                {subcategory.name}
                               </div>
                             )}
                             {subcategory.docs.map((doc) => {
                               const isDocActive = isActiveDoc(doc.slug);
-
                               return (
                                 <Link
                                   key={doc.slug}
@@ -189,11 +208,14 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
 
       {/* Desktop Sidebar - Only visible on large screens */}
       <aside className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto border-r border-gray-200 pl-5 pr-4 sm:pl-8 lg:pl-14 pt-4 pb-8 self-start">
+        <div className="mb-4">
+          <DocsSearchTrigger />
+        </div>
         <div>
           <nav className="flex flex-col gap-3 pb-8">
-            {/* Desktop Categories */}
             {categories.map((category) => {
               const isActive = isActiveCategory(category);
+              const items = buildSidebarItems(category);
 
               return (
                 <div key={category.slug} className="flex flex-col gap-1.5">
@@ -207,30 +229,25 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
                   </div>
 
                   <div className="ml-6 flex flex-col gap-0.5">
-                    {/* Direct docs (skip ones whose title matches a subcategory — those render as subcategory parents below) */}
-                    {category.docs
-                      .filter((doc) => !category.subcategories?.some((sc) => sc.name === doc.title))
-                      .map((doc) => {
-                        const isDocActive = isActiveDoc(doc.slug);
-
+                    {items.map((item) => {
+                      if (item.kind === 'doc') {
+                        const isDocActive = isActiveDoc(item.doc.slug);
                         return (
                           <Link
-                            key={doc.slug}
-                            href={`/docs/${doc.slug}`}
+                            key={item.doc.slug}
+                            href={`/docs/${item.doc.slug}`}
                             className={`block px-3 py-1 text-sm rounded-md transition-colors ${
                               isDocActive
                                 ? 'bg-blue-50 text-blue-700 font-medium'
                                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                             }`}
                           >
-                            {doc.title}
+                            {item.doc.title}
                           </Link>
                         );
-                      })}
+                      }
 
-                    {/* Subcategories — if a sibling doc shares the subcategory name, render that doc as the parent link */}
-                    {category.subcategories?.map((subcategory) => {
-                      const parentDoc = category.docs.find((d) => d.title === subcategory.name);
+                      const { subcategory, parentDoc } = item;
                       const isParentActive = parentDoc ? isActiveDoc(parentDoc.slug) : false;
 
                       return (
@@ -253,7 +270,6 @@ export default function DocsSidebar({ categories }: DocsSidebarProps) {
                           )}
                           {subcategory.docs.map((doc) => {
                             const isDocActive = isActiveDoc(doc.slug);
-
                             return (
                               <Link
                                 key={doc.slug}

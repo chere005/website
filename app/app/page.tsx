@@ -24,16 +24,42 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="min-h-[calc(100vh-4rem)] flex items-center relative bg-[#fafafa] overflow-hidden">
-          {/* Subtle grid texture */}
-          <div className="absolute inset-0 [background-image:radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.03)_1px,transparent_0)] [background-size:40px_40px]"></div>
+          {/* Grid background — hairline lines, radial mask */}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-60"
+            style={{
+              backgroundImage:
+                'linear-gradient(to right, rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.08) 1px, transparent 1px)',
+              backgroundSize: '80px 80px',
+              WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent)',
+              maskImage: 'radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent)',
+            }}
+          ></div>
 
-          <div className="container px-4 md:px-6 max-w-7xl mx-auto relative">
-            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          <div className="mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-14 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-center gap-12 lg:gap-16">
               {/* Left: Heading */}
-              <div className="flex-1 text-center lg:text-left lg:shrink-0 lg:basis-2/5">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-950 leading-[1.15] tracking-tight">
+              <div className="text-center lg:text-left min-w-0">
+                <h1
+                  className="font-medium text-gray-950 m-0"
+                  style={{
+                    fontSize: 'clamp(40px, 5.4vw, 64px)',
+                    lineHeight: 1.02,
+                    letterSpacing: '-0.028em',
+                    textWrap: 'balance',
+                  }}
+                >
                   Open Source AI Stack for Your{' '}
-                  <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                  <span
+                    className="text-gray-950"
+                    style={{
+                      backgroundImage: 'linear-gradient(#4f46e5, #4f46e5)',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: '0 95%',
+                      backgroundSize: '100% 4px',
+                      paddingBottom: '2px',
+                    }}
+                  >
                     Enterprise
                   </span>
                   .
@@ -41,7 +67,7 @@ export default function Home() {
               </div>
 
               {/* Right: Platform Architecture Diagram */}
-              <div className="lg:basis-3/5 w-full">
+              <div className="w-full min-w-0">
                 <Image
                   src="/api/docs-images/platform-overview-architecture.webp"
                   alt="Archestra Platform Architecture"
@@ -60,7 +86,7 @@ export default function Home() {
           <div className="container px-4 md:px-6 max-w-7xl mx-auto">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-10">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Quick Start</h2>
+                <h2 className="text-2xl md:text-3xl font-medium text-gray-900 tracking-[-0.02em]">Quick Start</h2>
               </div>
               <QuickStartBlock messagingProvider={messagingProvider} onMessagingProviderChange={setMessagingProvider} />
             </div>
@@ -82,7 +108,7 @@ export default function Home() {
                   <span className="text-red-700 font-medium text-sm">Security Foundation</span>
                 </div>
 
-                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h2 className="text-4xl lg:text-5xl font-medium text-gray-900 leading-[1.02] tracking-[-0.03em]">
                   Deterministic Agentic Guardrails to{' '}
                   <span className="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
                     Prevent Data Exfiltration
@@ -225,7 +251,7 @@ export default function Home() {
                   <span className="text-purple-700 font-medium text-sm">User Interface</span>
                 </div>
 
-                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h2 className="text-4xl lg:text-5xl font-medium text-gray-900 leading-[1.02] tracking-[-0.03em]">
                   Internal{' '}
                   <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                     ChatGPT-like UI
@@ -353,7 +379,7 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left Column - Content */}
               <div className="space-y-6">
-                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h2 className="text-4xl lg:text-5xl font-medium text-gray-900 leading-[1.02] tracking-[-0.03em]">
                   🦀 Talk to autonomous agents via{' '}
                   <span className="bg-gradient-to-r from-teal-600 to-green-600 bg-clip-text text-transparent">
                     Slack, MS Teams and even E-Mail
@@ -406,7 +432,7 @@ export default function Home() {
         {/* Infrastructure Hero */}
         <section className="py-32 bg-white relative overflow-hidden">
           <div className="container px-4 md:px-6 max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-950 leading-tight tracking-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-950 leading-[1.02] tracking-[-0.03em]">
               Actually, it&apos;s an open source infrastructure component to{' '}
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
                 scale autonomous agents
@@ -420,7 +446,7 @@ export default function Home() {
         <section className="pb-20 pt-20 bg-white">
           <div className="container px-4 md:px-6 max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900">Integrates with your stack</h2>
+              <h2 className="text-3xl font-medium text-gray-900 tracking-[-0.02em]">Integrates with your stack</h2>
             </div>
             {/* Platform Logos Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
@@ -494,7 +520,7 @@ export default function Home() {
                   <span className="text-purple-700 font-medium text-sm">Centralized Governance</span>
                 </div>
 
-                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h2 className="text-4xl lg:text-5xl font-medium text-gray-900 leading-[1.02] tracking-[-0.03em]">
                   Private MCP Registry with{' '}
                   <span className="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                     Full Governance
@@ -632,7 +658,7 @@ export default function Home() {
                   <span className="text-blue-700 font-medium text-sm">Cloud-Native Architecture</span>
                 </div>
 
-                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h2 className="text-4xl lg:text-5xl font-medium text-gray-900 leading-[1.02] tracking-[-0.03em]">
                   Kubernetes-Native{' '}
                   <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
                     MCP Orchestrator
@@ -766,7 +792,7 @@ export default function Home() {
                   <span className="text-green-700 font-medium text-sm">Cost Optimization</span>
                 </div>
 
-                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h2 className="text-4xl lg:text-5xl font-medium text-gray-900 leading-[1.02] tracking-[-0.03em]">
                   Cost Monitoring, Limits and{' '}
                   <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                     Dynamic Optimization
@@ -933,7 +959,7 @@ export default function Home() {
                   <span className="text-indigo-700 font-medium text-sm">Observability</span>
                 </div>
 
-                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h2 className="text-4xl lg:text-5xl font-medium text-gray-900 leading-[1.02] tracking-[-0.03em]">
                   Works with Your{' '}
                   <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                     Observability Stack
@@ -1122,7 +1148,7 @@ export default function Home() {
         <section className="py-24 bg-gradient-to-b from-white to-gray-50">
           <div className="container px-4 md:px-6 max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl md:text-5xl font-medium text-gray-900 mb-4 leading-[1.02] tracking-[-0.03em]">
                 <span className="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
                   Production Ready
                 </span>
@@ -1292,7 +1318,7 @@ export default function Home() {
         <section className="py-16 bg-white">
           <div className="container px-4 md:px-6 max-w-7xl mx-auto">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Contributors</h2>
+              <h2 className="text-3xl font-medium text-gray-900 mb-4 tracking-[-0.02em]">Contributors</h2>
               <p className="text-lg text-gray-600 mb-8">
                 Thank you for contributing and continuously making <b>Archestra</b> better, <b>you're awesome</b> 🫶
               </p>
@@ -1318,7 +1344,7 @@ export default function Home() {
           <div className="absolute inset-0 [background-image:radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.02)_1px,transparent_0)] [background-size:32px_32px]"></div>
           <div className="container px-4 md:px-6 max-w-4xl mx-auto relative">
             <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Quick Start</h2>
+              <h2 className="text-3xl md:text-4xl font-medium text-gray-900 tracking-[-0.02em]">Quick Start</h2>
             </div>
             <QuickStartBlock messagingProvider={messagingProvider} onMessagingProviderChange={setMessagingProvider} />
           </div>
