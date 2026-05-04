@@ -176,3 +176,4 @@ When making changes:
 6. Update OpenAPI spec with `pnpm openapi:generate` when modifying API endpoints
 7. Write tests for new functionality, mock external dependencies
 8. When working with the catalog data, ensure JSON validity with `pnpm catalog:validate`
+9. **When renaming, moving, deleting, or fixing a typo in any public route** (page in `app/`, doc, blog post, catalog slug, marketing URL, etc.), add a permanent 301 redirect from the OLD path to the NEW path in `app/lib/old-links-redirect.mjs`. Read the comment block at the top of that file for the full policy (when to redirect vs. when to let it 404). Skipping this breaks inbound links and tanks SEO.

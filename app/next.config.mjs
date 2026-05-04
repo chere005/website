@@ -1,3 +1,5 @@
+import { oldLinksRedirects } from './lib/old-links-redirect.mjs';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -33,6 +35,10 @@ const nextConfig = {
           {
             key: 'Access-Control-Allow-Headers',
             value: 'Content-Type',
+          },
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
           },
         ],
       },
@@ -96,23 +102,8 @@ const nextConfig = {
     ];
   },
   async redirects() {
-    return [
-      /**
-       * Address some typos we have in the platform docs URLs
-       */
-      {
-        source: '/docs/platfrom-quickstart',
-        destination: '/docs/platform-quickstart',
-        permanent: true,
-      },
-      {
-        source: '/docs/platfrom-developer-quickstart',
-        destination: '/docs/platform-developer-quickstart',
-        permanent: true,
-      },
-    ];
+    return oldLinksRedirects;
   },
-  skipTrailingSlashRedirect: true,
 };
 
 export default nextConfig;

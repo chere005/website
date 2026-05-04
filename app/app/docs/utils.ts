@@ -32,6 +32,9 @@ export function buildDocMetadata(doc: DocPage | undefined, origin: string, compa
     title: `${doc.title} | ${companyName} Docs`,
     description,
     metadataBase: new URL(origin),
+    alternates: {
+      canonical: `${origin}/docs/${doc.slug}`,
+    },
     openGraph: {
       title: doc.title,
       description,

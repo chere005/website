@@ -2,10 +2,13 @@ import { MetadataRoute } from 'next';
 
 import constants from '@constants';
 import { loadServers } from '@mcpCatalog/lib/catalog';
+import { calculateQualityScore } from '@mcpCatalog/lib/quality-calculator';
 import { generateMcpCatalogDetailPageUrl } from '@mcpCatalog/lib/urls';
 
 import { getAllPosts } from './blog/utils';
 import { cachedGetAvailableDates, cachedGetChannels, cachedGetThreadsForSitemap } from './community-stream/db/cache';
+
+const MIN_CATALOG_QUALITY_FOR_INDEX = 40;
 
 // Regenerate sitemap every 10 minutes
 export const revalidate = 600;
@@ -36,10 +39,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(post.date),
   }));
 
-  const serverPages: MetadataRoute.Sitemap = servers.map((server) => ({
-    url: generateMcpCatalogDetailPageUrl(server.name),
-    lastModified: server.last_scraped_at ? new Date(server.last_scraped_at) : new Date(),
-  }));
+  const serverPages: MetadataRoute.Sitemap = servers
+    .filter((server) => calculateQualityScore(server).total >= MIN_CATALOG_QUALITY_FOR_INDEX)
+    .map((server) => ({
+      url: generateMcpCatalogDetailPageUrl(server.name),
+      lastModified: server.last_scraped_at ? new Date(server.last_scraped_at) : new Date(),
+    }));
 
   let communityPages: MetadataRoute.Sitemap = [];
   try {

@@ -75,6 +75,9 @@ const websiteJsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(websiteUrls.base),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: companyTagline,
     template: `%s | ${companyName}`,

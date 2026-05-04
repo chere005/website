@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.archestra.ai" }],
+      "destination": "https://archestra.ai/:path*",
+      "permanent": true
+    }
+  ]
+}

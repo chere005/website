@@ -51,6 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const qualityScore = calculateQualityScore(server);
   const mcpCatalogDetailPageUrl = generateMcpCatalogDetailPageUrl(serverId);
+  const shouldIndex = qualityScore.total >= 40;
 
   let keywords = ['MCP server', 'Model Context Protocol', serverName, 'enterprise', 'AI agent integration'];
   if (category) {
@@ -83,6 +84,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: mcpCatalogDetailPageUrl,
     },
+    robots: shouldIndex ? undefined : { index: false, follow: true },
   };
 }
 
