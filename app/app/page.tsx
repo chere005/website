@@ -429,6 +429,69 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Knowledge Base Section */}
+        <section className="py-24 bg-gradient-to-br from-blue-50 via-cyan-50 to-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-grid-slate-100/30 [mask-image:radial-gradient(ellipse_at_center,white,transparent_85%)]"></div>
+
+          <div className="container px-4 md:px-6 max-w-7xl mx-auto relative">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left Column - Content */}
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-100 rounded-full">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <span className="text-blue-700 font-medium text-sm">Built-in RAG</span>
+                </div>
+
+                <h2 className="text-4xl lg:text-5xl font-medium text-gray-900 leading-[1.02] tracking-[-0.03em]">
+                  📚 Plug agents into your{' '}
+                  <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                    company knowledge
+                  </span>
+                </h2>
+
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Connect Jira, Confluence, GitHub, Notion, SharePoint, Google Drive, Salesforce, and more, so agents
+                  can answer from your own data.
+                </p>
+
+                <div className="flex items-start gap-4 bg-white/80 backdrop-blur rounded-lg p-4 border border-blue-200">
+                  <div className="p-2 bg-blue-100 rounded-lg flex-shrink-0">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">No external dependencies</h3>
+                    <p className="text-sm text-gray-600 mt-1">
+                      The full RAG stack — chunking, embedding, hybrid search, reranking — runs inside Archestra. No
+                      external vector database or separate retrieval service required.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column - Screenshot */}
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl blur-2xl opacity-15"></div>
+
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white">
+                  <Image
+                    src="/api/docs-images/automated_screenshots/platform-knowledge-bases_chat-with-citations.webp"
+                    alt="Agent answering from a Jira Knowledge Base with cited sources"
+                    width={2000}
+                    height={1103}
+                    className="w-full h-auto"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                  />
+                </div>
+                <div className="absolute -top-3 -right-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                  Jira example
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Infrastructure Hero */}
         <section className="py-32 bg-white relative overflow-hidden">
           <div className="container px-4 md:px-6 max-w-4xl mx-auto text-center">
