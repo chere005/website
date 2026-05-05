@@ -46,8 +46,7 @@ export default function BlogPage() {
             backgroundImage:
               'linear-gradient(to right, rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.08) 1px, transparent 1px)',
             backgroundSize: '80px 80px',
-            WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent)',
-            maskImage: 'radial-gradient(ellipse 80% 60% at 50% 30%, black, transparent)',
+            backgroundRepeat: 'repeat',
           }}
         />
 

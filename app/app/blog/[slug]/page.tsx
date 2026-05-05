@@ -115,13 +115,14 @@ export default async function BlogPostPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <Header />
 
-      <main className="flex-1 relative flex flex-col">
+      <main className="flex-1 relative flex flex-col bg-[#fafafa] overflow-hidden">
         <div
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 pointer-events-none opacity-60"
           style={{
             backgroundImage:
-              'linear-gradient(to right, #f0f0f0 1px, transparent 1px), linear-gradient(to bottom, #f0f0f0 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
+              'linear-gradient(to right, rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.08) 1px, transparent 1px)',
+            backgroundSize: '80px 80px',
+            backgroundRepeat: 'repeat',
           }}
         />
 

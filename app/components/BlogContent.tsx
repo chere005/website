@@ -133,6 +133,18 @@ export default function BlogContent({ content }: BlogContentProps) {
         blockquote: ({ node, ...props }) => (
           <blockquote {...props} className="border-l-4 border-gray-300 pl-6 my-6 text-lg text-gray-600 italic" />
         ),
+        table: ({ node, ...props }) => (
+          <div className="my-8 overflow-x-auto rounded-lg border border-gray-200 bg-white">
+            <table {...props} className="w-full min-w-[640px] divide-y divide-gray-200 text-left" />
+          </div>
+        ),
+        thead: ({ node, ...props }) => <thead {...props} className="bg-gray-50" />,
+        tbody: ({ node, ...props }) => <tbody {...props} className="divide-y divide-gray-200" />,
+        tr: ({ node, ...props }) => <tr {...props} className="align-top" />,
+        th: ({ node, ...props }) => (
+          <th {...props} className="px-4 py-3 text-sm font-medium uppercase tracking-wide text-gray-600" />
+        ),
+        td: ({ node, ...props }) => <td {...props} className="px-4 py-3 text-base text-gray-700" />,
         pre: ({ node, children, ...props }) => {
           // Check if this is a mermaid code block
           if (node && node.children && node.children.length > 0) {
