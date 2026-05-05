@@ -1,25 +1,12 @@
-import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
-import constants from '@constants';
-
-import DocPage, { generateMetadata as generateDocMetadata } from './[slug]/page';
 import DeveloperNotice from './components/DeveloperNotice';
 import { getAllDocs } from './utils';
 
 function getDefaultSlug(): string | undefined {
   const docs = getAllDocs();
   if (docs.length === 0) return undefined;
-  return docs.find((doc) => doc.slug === 'platform-quickstart')?.slug ?? docs[0].slug;
-}
-
-export async function generateMetadata(): Promise<Metadata> {
-  const slug = getDefaultSlug();
-  if (!slug) {
-    return {
-      title: `Documentation | ${constants.company.name}`,
-    };
-  }
-  return generateDocMetadata({ params: Promise.resolve({ slug }) });
+  return docs.find((doc) => doc.slug === 'platform-overview')?.slug ?? docs[0].slug;
 }
 
 export default function DocsIndexPage() {
@@ -39,5 +26,5 @@ export default function DocsIndexPage() {
     );
   }
 
-  return <DocPage params={Promise.resolve({ slug })} />;
+  redirect(`/docs/${slug}`);
 }

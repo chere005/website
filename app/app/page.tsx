@@ -23,7 +23,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="py-12 lg:py-20 relative bg-[#fafafa] overflow-hidden">
+        <section className="flex min-h-[calc(100vh-64px)] items-center py-12 lg:py-20 relative bg-[#fafafa] overflow-hidden">
           {/* Grid background — hairline lines, radial mask */}
           <div
             className="absolute inset-0 pointer-events-none opacity-60"
@@ -43,7 +43,7 @@ export default function Home() {
                 <h1
                   className="font-bold text-gray-950 m-0"
                   style={{
-                    fontSize: 'clamp(44px, 6vw, 88px)',
+                    fontSize: 'clamp(32px, 4vw, 56px)',
                     lineHeight: 1.02,
                     letterSpacing: '-0.032em',
                     textWrap: 'balance',
