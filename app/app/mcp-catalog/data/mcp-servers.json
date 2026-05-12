@@ -13,6 +13,7 @@
   "https://mcp.daloopa.com/server/mcp",
   "https://mcp.hubspot.com/anthropic",
   "https://mcp.paypal.com/mcp",
+  "https://mcp.port.io/v1",
   "https://api.dashboard.plaid.com/mcp/sse",
   "https://mcp.squareup.com/sse",
   "https://mcp.stripe.com",

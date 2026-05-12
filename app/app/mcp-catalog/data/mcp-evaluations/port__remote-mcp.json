@@ -1,0 +1,43 @@
+{
+  "name": "port__remote-mcp",
+  "display_name": "Port MCP",
+  "description": "Remote MCP server for Port - internal developer portal, service catalog, scorecards, and self-service actions",
+  "oauth_config": {
+    "name": "Port MCP",
+    "server_url": "https://mcp.port.io/v1",
+    "client_id": "",
+    "redirect_uris": ["http://localhost:8080/oauth/callback"],
+    "scopes": ["read", "write"],
+    "description": "Port MCP Server (dynamic registration)",
+    "default_scopes": ["read", "write"],
+    "supports_resource_metadata": true
+  },
+  "tools": [],
+  "prompts": [],
+  "user_config": {},
+  "readme": null,
+  "category": "Enterprise",
+  "quality_score": 80,
+  "archestra_config": {
+    "client_config_permutations": null,
+    "oauth": {
+      "provider": null,
+      "required": true
+    },
+    "works_in_archestra": true
+  },
+  "framework": null,
+  "last_scraped_at": "2026-05-12T00:00:00.000Z",
+  "evaluation_model": null,
+  "raw_dependencies": null,
+  "author": {
+    "name": "port"
+  },
+  "server": {
+    "type": "remote",
+    "url": "https://mcp.port.io/v1",
+    "docs_url": "https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation/"
+  },
+  "github_info": null,
+  "programming_language": null
+}
