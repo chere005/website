@@ -2,6 +2,7 @@ import { oldLinksRedirects } from './lib/old-links-redirect.mjs';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  skipTrailingSlashRedirect: true,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -71,6 +72,15 @@ const nextConfig = {
   },
   async rewrites() {
     return [
+      // PostHog reverse proxy — avoids ad blockers hitting posthog.com directly
+      {
+        source: '/ingest/static/:path*',
+        destination: 'https://us-assets.i.posthog.com/static/:path*',
+      },
+      {
+        source: '/ingest/:path*',
+        destination: 'https://us.i.posthog.com/:path*',
+      },
       {
         source: '/docs/platfrom/:path*',
         destination: '/api/docs-images/platfrom/:path*',

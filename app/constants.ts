@@ -187,5 +187,8 @@ export default {
   googleAnalytics: {
     measurementId: 'G-ZMQMSHJV9F',
   },
+  posthog: {
+    apiKey: process.env.NEXT_PUBLIC_POSTHOG_KEY ?? '',
+  },
   debug: process.env.NODE_ENV === 'development',
 };

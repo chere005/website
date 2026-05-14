@@ -4,6 +4,7 @@ import { Inter_Tight, JetBrains_Mono } from 'next/font/google';
 
 import ConditionalAnalytics from '@components/ConditionalAnalytics';
 import GDPRConsentPanel from '@components/GDPRConsentPanel';
+import { PostHogProvider } from '@components/PostHogProvider';
 import constants from '@constants';
 
 import './globals.css';
@@ -150,10 +151,12 @@ export default function RootLayout({
         <link rel="prefetch" href="https://assets.calendly.com/assets/external/widget.js" as="script" />
       </head>
       <body className={`${interTight.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        {children}
-        <GDPRConsentPanel />
-        <ConditionalAnalytics gaId={constants.googleAnalytics.measurementId} />
-        <SpeedInsights />
+        <PostHogProvider apiKey={constants.posthog.apiKey}>
+          {children}
+          <GDPRConsentPanel />
+          <ConditionalAnalytics gaId={constants.googleAnalytics.measurementId} />
+          <SpeedInsights />
+        </PostHogProvider>
       </body>
     </html>
   );
