@@ -81,6 +81,59 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Testimonial Section */}
+        <section className="py-24 bg-white">
+          <div className="mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-14">
+            <figure className="grid grid-cols-1 md:grid-cols-[auto_1fr] items-center gap-10 md:gap-14 max-w-5xl mx-auto">
+              <div className="relative mx-auto md:mx-0">
+                <div className="absolute -inset-3 bg-gradient-to-br from-blue-200/60 to-indigo-200/60 rounded-full blur-2xl opacity-70"></div>
+                <Image
+                  src="/santi-barclay.jpeg"
+                  alt="Santiago Barclay"
+                  width={240}
+                  height={240}
+                  className="relative h-48 w-48 md:h-56 md:w-56 rounded-full object-cover shadow-xl ring-1 ring-gray-200"
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <blockquote>
+                  <p className="text-xl md:text-2xl leading-[1.5] text-gray-800 tracking-[-0.015em] font-light">
+                    “We came across Archestra while searching for an infrastructure layer to scale and secure our
+                    internal agents. From our very first interactions, the energy, depth of knowledge, and speed of the
+                    Archestra team made the potential obvious. Archestra stood out for the team's{' '}
+                    <span className="text-gray-900 font-normal">security-first mindset</span>, its{' '}
+                    <span className="text-gray-900 font-normal">open-source nature</span>, an intuitive UI, and a
+                    deployment experience that just works.”
+                  </p>
+                </blockquote>
+                <figcaption className="mt-6 flex flex-col md:flex-row md:items-baseline md:gap-3">
+                  <a
+                    href="https://www.linkedin.com/in/santibarclay/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-medium text-gray-900 hover:text-blue-600 transition-colors"
+                  >
+                    Santiago Barclay
+                  </a>
+                  <span className="hidden md:inline text-gray-300">·</span>
+                  <span className="text-sm text-gray-500">
+                    Head of Cybersecurity at{' '}
+                    <a
+                      href="https://akua.la"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-700 hover:text-blue-600 transition-colors"
+                    >
+                      Akua
+                    </a>
+                    , payments infrastructure for Latin America
+                  </span>
+                </figcaption>
+              </div>
+            </figure>
+          </div>
+        </section>
+
         {/* Launch Section */}
         <section className="py-16 bg-gray-50">
           <div className="container px-4 md:px-6 max-w-7xl mx-auto">
