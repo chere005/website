@@ -5,12 +5,16 @@
   "oauth_config": {
     "name": "Port MCP",
     "server_url": "https://mcp.port.io/v1",
+    "token_endpoint": "https://api.port.io/v1/auth/access_token",
     "client_id": "",
-    "redirect_uris": ["http://localhost:8080/oauth/callback"],
-    "scopes": ["read", "write"],
-    "description": "Port MCP Server (dynamic registration)",
-    "default_scopes": ["read", "write"],
-    "supports_resource_metadata": true
+    "client_secret": "",
+    "redirect_uris": [],
+    "scopes": [],
+    "description": "Port MCP Server (OAuth 2.0 client credentials)",
+    "default_scopes": [],
+    "supports_resource_metadata": false,
+    "generic_oauth": true,
+    "grant_type": "client_credentials"
   },
   "tools": [],
   "prompts": [],
@@ -27,7 +31,7 @@
     "works_in_archestra": true
   },
   "framework": null,
-  "last_scraped_at": "2026-05-12T00:00:00.000Z",
+  "last_scraped_at": "2026-05-13T00:00:00.000Z",
   "evaluation_model": null,
   "raw_dependencies": null,
   "author": {
