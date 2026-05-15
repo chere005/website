@@ -3,6 +3,10 @@
 # dependencies
 node_modules
 
+.playwright-mcp
+.claude/scheduled_tasks.lock
+app/.claude/scheduled_tasks.lock
+
 # next.js
 .next
 out

@@ -29,8 +29,8 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-            <Image src="/cncf.png" alt="CNCF Logo" width={150} height={60} />
-            <Image src="/Linux_Foundation_logo.png" alt="Linux Foundation Logo" width={120} height={48} />
+            <Image src="/cncf.png" alt="CNCF Logo" width={150} height={53} />
+            <Image src="/Linux_Foundation_logo.png" alt="Linux Foundation Logo" width={120} height={40} />
           </div>
         </div>
       </div>

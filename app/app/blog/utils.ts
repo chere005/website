@@ -20,7 +20,7 @@ export function getAllPosts(): BlogPost[] {
     const allPostsData = fileNames
       .filter((fileName) => fileName.endsWith('.md'))
       .map((fileName) => {
-        const slug = fileName.replace(/\.md$/, '');
+        const slug = fileName.replace(/\.md$/, '').replace(/^note-/, '');
         const fullPath = path.join(postsDirectory, fileName);
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         const { data, content } = matter(fileContents);
@@ -30,7 +30,7 @@ export function getAllPosts(): BlogPost[] {
         return {
           slug,
           title: data.title || slug,
-          date: data.date || new Date().toISOString(),
+          date: data.date,
           author: data.author || 'Archestra Team',
           excerpt: data.description || data.excerpt || content.slice(0, 200) + '...',
           content,
@@ -40,13 +40,18 @@ export function getAllPosts(): BlogPost[] {
           imageWidth: imageSize?.width,
           github: data.github,
           cta: data.cta,
+          isNote: data.isNote === true,
         } as BlogPost;
       });
 
     return allPostsData.sort((a, b) => {
+      // Posts without a date sort after posts with a date.
+      if (!a.date && !b.date) return 0;
+      if (!a.date) return 1;
+      if (!b.date) return -1;
       const dateA = new Date(a.date).getTime();
       const dateB = new Date(b.date).getTime();
-      return dateB - dateA; // Sort in descending order (newest first)
+      return dateB - dateA; // Newest first
     });
   } catch (error) {
     console.error('Error reading blog posts:', error);
@@ -55,10 +60,13 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  let fullPath = path.join(postsDirectory, `${slug}.md`);
 
   if (!fs.existsSync(fullPath)) {
-    return undefined;
+    fullPath = path.join(postsDirectory, `note-${slug}.md`);
+    if (!fs.existsSync(fullPath)) {
+      return undefined;
+    }
   }
 
   const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -69,7 +77,7 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
   return {
     slug,
     title: data.title || slug,
-    date: data.date || new Date().toISOString(),
+    date: data.date,
     author: data.author || 'Archestra Team',
     excerpt: data.description || data.excerpt || content.slice(0, 200) + '...',
     content,
@@ -79,10 +87,12 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
     imageWidth: imageSize?.width,
     github: data.github,
     cta: data.cta,
+    isNote: data.isNote === true,
   };
 }
 
-export function formatDate(dateString: string): string {
+export function formatDate(dateString: string | undefined): string {
+  if (!dateString) return '';
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -91,7 +101,8 @@ export function formatDate(dateString: string): string {
   });
 }
 
-export function formatDateShort(dateString: string): string {
+export function formatDateShort(dateString: string | undefined): string {
+  if (!dateString) return '';
   const date = new Date(dateString);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');

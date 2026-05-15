@@ -1,7 +1,7 @@
 export interface BlogPost {
   slug: string;
   title: string;
-  date: string;
+  date?: string;
   author: string;
   excerpt: string;
   content: string;
@@ -14,4 +14,5 @@ export interface BlogPost {
     text: string;
     url: string;
   };
+  isNote?: boolean;
 }

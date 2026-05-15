@@ -23,7 +23,9 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getAllPosts();
+  const allPosts = getAllPosts();
+  const posts = allPosts.filter((p) => !p.isNote);
+  const notes = allPosts.filter((p) => p.isNote);
 
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -118,6 +120,23 @@ export default function BlogPage() {
                 </article>
               ))}
             </div>
+          )}
+
+          {notes.length > 0 && (
+            <section className="mt-20">
+              <h2 className="text-sm font-medium tracking-wide uppercase text-gray-500 mb-4">Notes</h2>
+              <div className="flex flex-wrap gap-2">
+                {notes.map(({ slug, title }) => (
+                  <Link
+                    key={slug}
+                    href={`/blog/${slug}`}
+                    className="inline-flex items-center rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-700 hover:border-gray-300 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+                  >
+                    {title}
+                  </Link>
+                ))}
+              </div>
+            </section>
           )}
         </div>
       </main>

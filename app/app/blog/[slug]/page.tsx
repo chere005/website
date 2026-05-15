@@ -80,8 +80,7 @@ export default async function BlogPostPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
-    datePublished: post.date,
-    dateModified: post.date,
+    ...(post.date ? { datePublished: post.date, dateModified: post.date } : {}),
     author: { '@type': 'Person', name: post.author },
     publisher: {
       '@type': 'Organization',
@@ -129,14 +128,14 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="container relative z-10 px-4 md:px-6 py-16 max-w-4xl mx-auto">
           <article className="text-center">
             <header className="mb-16">
-              <div className="text-blue-600 text-base mb-4">{formatDateShort(post.date)}</div>
+              {post.date && <div className="text-blue-600 text-base mb-4">{formatDateShort(post.date)}</div>}
               <h1 className="text-3xl md:text-4xl font-medium text-gray-900 mb-6 leading-tight max-w-4xl mx-auto">
                 {post.title}
               </h1>
 
               <p className="text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto mb-8">{post.excerpt}</p>
 
-              {post.image && (
+              {!post.isNote && post.image && (
                 <div className="mb-8 max-w-4xl mx-auto">
                   {post.imageWidth && post.imageHeight ? (
                     <Image
@@ -146,6 +145,7 @@ export default async function BlogPostPage({ params }: Props) {
                       height={post.imageHeight}
                       className="w-full h-auto rounded-lg shadow-lg"
                       sizes="(min-width: 1280px) 896px, (min-width: 768px) calc(100vw - 96px), calc(100vw - 32px)"
+                      priority
                     />
                   ) : (
                     <img src={post.image} alt={post.title} className="w-full rounded-lg shadow-lg" />
@@ -153,7 +153,7 @@ export default async function BlogPostPage({ params }: Props) {
                 </div>
               )}
 
-              {(post.github || post.cta) && (
+              {!post.isNote && (post.github || post.cta) && (
                 <div className="flex items-center justify-center gap-4">
                   {post.github && (
                     <a
