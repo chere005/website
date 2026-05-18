@@ -75,11 +75,11 @@ const nextConfig = {
       // PostHog reverse proxy — avoids ad blockers hitting posthog.com directly
       {
         source: '/ingest/static/:path*',
-        destination: 'https://us-assets.i.posthog.com/static/:path*',
+        destination: 'https://eu-assets.i.posthog.com/static/:path*',
       },
       {
         source: '/ingest/:path*',
-        destination: 'https://us.i.posthog.com/:path*',
+        destination: 'https://eu.i.posthog.com/:path*',
       },
       {
         source: '/docs/platfrom/:path*',
