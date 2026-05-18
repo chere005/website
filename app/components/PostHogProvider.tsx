@@ -31,21 +31,27 @@ function PostHogSetup({ apiKey }: { apiKey: string }) {
     });
 
     const syncConsent = () => {
-      if (gdprConsentStore.hasAnalyticsConsent()) {
+      const wantOptIn = gdprConsentStore.hasAnalyticsConsent();
+      const isOptedIn = posthog.has_opted_in_capturing();
+      if (wantOptIn && !isOptedIn) {
         posthog.opt_in_capturing();
-      } else {
+      } else if (!wantOptIn && isOptedIn) {
         posthog.opt_out_capturing();
       }
     };
 
     syncConsent();
 
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'gdpr-consent') syncConsent();
+    };
+
     const unsubscribe = gdprConsentStore.subscribe(syncConsent);
-    window.addEventListener('storage', syncConsent);
+    window.addEventListener('storage', onStorage);
 
     return () => {
       unsubscribe();
-      window.removeEventListener('storage', syncConsent);
+      window.removeEventListener('storage', onStorage);
     };
   }, [apiKey]);
 
