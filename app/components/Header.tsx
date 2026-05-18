@@ -26,15 +26,12 @@ export default function Header() {
           <div className="relative h-[28px] w-[28px] shrink-0">
             <Image src={websiteUrls.logoRelativeUrl} alt={`${companyName} Logo`} fill className="object-contain" />
           </div>
-          <span
-            className="hidden lg:inline font-mono text-[17px] font-medium text-gray-900"
-            style={{ letterSpacing: '-0.015em' }}
-          >
+          <span className="font-mono text-[17px] font-medium text-gray-900" style={{ letterSpacing: '-0.015em' }}>
             Archestra<span className="text-gray-400">.AI</span>
           </span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-6 ml-4">
+        <nav className="hidden xl:flex items-center gap-6 ml-4">
           <Link href="/book-demo" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
             Book Demo
           </Link>
@@ -66,11 +63,11 @@ export default function Header() {
           </Link>
         </nav>
 
-        <div className="ml-auto hidden lg:flex items-center gap-3">
+        <div className="ml-auto hidden xl:flex items-center gap-3">
           <GitHubStarButton />
         </div>
 
-        <div className="ml-auto flex lg:hidden items-center gap-2">
+        <div className="ml-auto flex xl:hidden items-center gap-2">
           <GitHubStarButton />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -83,7 +80,7 @@ export default function Header() {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden border-t border-gray-200 bg-white">
+        <div className="xl:hidden border-t border-gray-200 bg-white">
           <nav className="flex flex-col px-4 py-2">
             <Link
               href="/book-demo"

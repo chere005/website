@@ -6,6 +6,17 @@ description: 'Is it the end of open source we know and love?'
 image: '/blog/2026-04-07-only-responsible-ai.webp'
 ---
 
+<div style="background: #f8f9fa; padding: 16px; border-radius: 6px; margin-bottom: 24px; border-left: 3px solid #6b7280;">
+  <p style="margin: 0 0 8px 0; color: #374151;">
+    Discussion on <strong>Hacker News</strong>:
+  </p>
+  <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+    <a href="https://news.ycombinator.com/item?id=48181125" target="_blank" rel="noopener noreferrer" style="color: #4b5563; text-decoration: underline;">
+      news.ycombinator.com
+    </a>
+  </div>
+</div>
+
 ## The End of Open Source as We Know It
 
 When a few months ago GitHub shared statistics about [celebrating an enormous contribution of AI in their product metrics](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/?utm_source=web-k2k-octoverse-cta&utm_medium=web&utm_campaign=universe25), completely missing the point of degraded contribution quality, we already felt that things were going south.
