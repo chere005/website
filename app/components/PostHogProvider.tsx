@@ -23,7 +23,7 @@ function PostHogSetup({ apiKey }: { apiKey: string }) {
   useEffect(() => {
     posthog.init(apiKey, {
       api_host: '/ingest',
-      ui_host: 'https://us.posthog.com',
+      ui_host: 'https://eu.posthog.com',
       capture_pageview: false,
       capture_pageleave: true,
       opt_out_capturing_by_default: true,
