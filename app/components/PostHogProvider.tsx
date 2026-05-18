@@ -26,6 +26,7 @@ function PostHogSetup({ apiKey }: { apiKey: string }) {
       ui_host: 'https://eu.posthog.com',
       capture_pageview: false,
       capture_pageleave: true,
+      capture_heatmaps: false,
       opt_out_capturing_by_default: true,
     });
 
