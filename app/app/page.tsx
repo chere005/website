@@ -3,6 +3,7 @@
 import { AlertTriangle, Calendar, Server, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePostHog } from 'posthog-js/react';
 import { useState } from 'react';
 
 import { GitHubIcon } from '@components/BrandIcons';
@@ -16,6 +17,7 @@ import constants from '@constants';
 export default function Home() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [messagingProvider, setMessagingProvider] = useState<MessagingProvider>('slack');
+  const phClient = usePostHog();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -64,6 +66,23 @@ export default function Home() {
                   </span>
                   .
                 </h1>
+                <div className="mt-8 flex justify-center lg:justify-start">
+                  <a
+                    href="https://github.com/archestra-ai/archestra"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      phClient?.capture('hero_cta_clicked', {
+                        label: 'self_host_for_free',
+                        destination: 'github_repo',
+                      })
+                    }
+                    className="inline-flex items-center gap-2.5 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-teal-600/25 text-base"
+                  >
+                    <GitHubIcon className="w-5 h-5" />
+                    Self-Host for Free
+                  </a>
+                </div>
               </div>
 
               {/* Right: Platform Architecture Diagram */}
