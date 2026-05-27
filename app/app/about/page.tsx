@@ -15,7 +15,7 @@ const {
     name: companyName,
     alternateName: companyAlternateName,
     description: companyDescription,
-    people: { joey: JOEY, matvey: MATVEY, ildar: ILDAR, innokentii: INNOKENTII },
+    people: { joey: JOEY, matvey: MATVEY, ildar: ILDAR, innokentii: INNOKENTII, alexander: ALEXANDER },
   },
 } = constants;
 
@@ -197,6 +197,38 @@ export default function AboutPage() {
                   <div className="flex justify-center gap-3 mt-3">
                     <a
                       href={INNOKENTII.sameAs}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 hover:text-blue-600 transition-colors"
+                    >
+                      <LinkedInIcon size={20} />
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Alexander */}
+              <Card className="border-2 hover:border-purple-200 transition-colors">
+                <CardContent className="p-6 text-left">
+                  <div className="flex justify-center mb-4">
+                    <Image
+                      src="/team/alexander.jpeg"
+                      alt={ALEXANDER.name}
+                      width={150}
+                      height={150}
+                      className="rounded-full object-cover"
+                    />
+                  </div>
+                  <h3 className="font-bold text-xl mb-2">{ALEXANDER.name}</h3>
+                  <p className="text-gray-700 font-medium mb-1">{ALEXANDER.jobTitle}</p>
+                  <p className="text-gray-500 text-sm mb-3">
+                    {ALEXANDER.address.addressLocality}, {ALEXANDER.address.addressCountry}
+                  </p>
+                  <p className="text-gray-700 text-sm leading-relaxed mb-4">{ALEXANDER.description}</p>
+                  <EmailCodePanel email="abalashov@archestra.ai" />
+                  <div className="flex justify-center gap-3 mt-3">
+                    <a
+                      href={ALEXANDER.sameAs}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-500 hover:text-blue-600 transition-colors"

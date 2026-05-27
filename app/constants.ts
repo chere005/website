@@ -97,12 +97,30 @@ const INNOKENTII = {
     'Engineer with experience ranging from building user interfaces to developing high-load distributed systems. Previously working on Grafana Mimir. Founding engineer at Amixr (acquired by Grafana Labs).',
 };
 
+const ALEXANDER = {
+  '@type': 'Person',
+  name: 'Alexander Balashov',
+  jobTitle: 'Member of Technical Staff',
+  worksFor: {
+    '@type': 'Organization',
+    name: COMPANY_NAME,
+  },
+  sameAs: 'https://www.linkedin.com/in/balashov/',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Yerevan',
+    addressCountry: 'Armenia',
+  },
+  description: 'Engineer. Cut his teeth in FinTech and eCommerce. Now middle-managing AI agents.',
+};
+
 const PEOPLE = {
   matvey: MATVEY,
   ildar: ILDAR,
   joey: JOEY,
   dominik: DOMINIK,
   innokentii: INNOKENTII,
+  alexander: ALEXANDER,
 };
 
 // GitHub constants
