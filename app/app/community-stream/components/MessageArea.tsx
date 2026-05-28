@@ -224,7 +224,7 @@ function JoinSlackBar() {
         </p>
 
         <a
-          href="/join-slack"
+          href="https://form.typeform.com/to/gRszyUDl"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative inline-flex items-center gap-3 text-[17px] font-bold text-white rounded-full px-10 py-4 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.03] bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 hover:from-blue-500 hover:via-indigo-500 hover:to-violet-500"
