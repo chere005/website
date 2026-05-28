@@ -57,7 +57,7 @@ export default function GDPRConsentPanel() {
           🍪
         </span>
         <p className="flex-1 text-sm text-gray-500 leading-snug">
-          We use cookies to understand how people use Archestra and make it better.
+          We use cookies to understand how people use this website and make it better.
         </p>
         <div className="flex items-center gap-2 flex-shrink-0">
           <button
