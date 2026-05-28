@@ -18,7 +18,7 @@ This repository contains the source code for [Archestra.AI](https://archestra.ai
 ### Prerequisites
 
 - Node.js 24+ (Latest LTS recommended)
-- pnpm 10.24.0+
+- pnpm 11.4.0
 
 ### Development
 

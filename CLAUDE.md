@@ -39,7 +39,7 @@ This is the Archestra.ai website - a Next.js application that hosts the MCP (Mod
 ### Tech Stack
 
 - **Framework**: Next.js 15 with App Router
-- **Package Manager**: pnpm (v10.14.0)
+- **Package Manager**: pnpm (v11.4.0)
 - **Testing**: Vitest with React Testing Library
 - **Styling**: Tailwind CSS with tailwindcss-animate
 - **UI Components**: Custom components using Radix UI primitives
