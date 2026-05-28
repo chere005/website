@@ -1,6 +1,5 @@
 'use client';
 
-import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { CONSENT_STORAGE_KEY, CONSENT_VERSION, ConsentSettings, gdprConsentStore } from '@lib/gdpr-consent-store';
@@ -33,39 +32,18 @@ export default function GDPRConsentPanel() {
   }, []);
 
   const handleAcceptAll = () => {
-    const allConsent: ConsentSettings = {
-      necessary: true,
-      analytics: true,
-      marketing: true,
-      preferences: true,
-    };
-    saveConsent(allConsent);
+    saveConsent({ necessary: true, analytics: true, marketing: true, preferences: true });
   };
 
   const handleRejectAll = () => {
-    const minimalConsent: ConsentSettings = {
-      necessary: true,
-      analytics: false,
-      marketing: false,
-      preferences: false,
-    };
-    saveConsent(minimalConsent);
+    saveConsent({ necessary: true, analytics: false, marketing: false, preferences: false });
   };
 
   const saveConsent = (settings: ConsentSettings) => {
     localStorage.setItem(
       CONSENT_STORAGE_KEY,
-      JSON.stringify({
-        version: CONSENT_VERSION,
-        timestamp: new Date().toISOString(),
-        settings,
-      })
+      JSON.stringify({ version: CONSENT_VERSION, timestamp: new Date().toISOString(), settings })
     );
-    setIsVisible(false);
-    setIsManuallyOpened(false);
-  };
-
-  const handleClose = () => {
     setIsVisible(false);
     setIsManuallyOpened(false);
   };
@@ -73,41 +51,40 @@ export default function GDPRConsentPanel() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 max-w-[100vw]">
-      <div className="mx-auto max-w-7xl">
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 p-4 sm:p-6 relative">
-          {isManuallyOpened && (
-            <button
-              onClick={handleClose}
-              className="absolute top-2 right-2 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
-              aria-label="Close"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          )}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div className="flex-1 pr-6 md:pr-0">
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept All",
-                you consent to our use of cookies.
-              </p>
-            </div>
-            <div className="flex gap-3 flex-wrap">
-              <button
-                onClick={handleRejectAll}
-                className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors flex-1 md:flex-none whitespace-nowrap"
-              >
-                Only Necessary
-              </button>
-              <button
-                onClick={handleAcceptAll}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex-1 md:flex-none whitespace-nowrap"
-              >
-                Accept All
-              </button>
-            </div>
-          </div>
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4">
+      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 px-5 py-4 flex items-center gap-4">
+        <span className="text-2xl select-none" aria-hidden="true">
+          🍪
+        </span>
+        <p className="flex-1 text-sm text-gray-500 leading-snug">
+          We use cookies to understand how people use Archestra and make it better.
+        </p>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <button
+            onClick={handleRejectAll}
+            className="text-sm text-gray-400 hover:text-gray-600 transition-colors px-1 whitespace-nowrap"
+          >
+            No thanks
+          </button>
+          <button
+            onClick={handleAcceptAll}
+            className="text-sm font-semibold text-white bg-gray-900 hover:bg-gray-700 transition-colors rounded-lg px-4 py-2 whitespace-nowrap"
+          >
+            Accept
+          </button>
         </div>
+        {isManuallyOpened && (
+          <button
+            onClick={() => {
+              setIsVisible(false);
+              setIsManuallyOpened(false);
+            }}
+            className="absolute top-2 right-2 text-gray-300 hover:text-gray-500 transition-colors"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        )}
       </div>
     </div>
   );
