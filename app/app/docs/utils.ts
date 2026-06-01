@@ -24,12 +24,13 @@ export function buildDocMetadata(doc: DocPage | undefined, origin: string, compa
     };
   }
 
-  const description = doc.description || `${doc.title} documentation for ${companyName}.`;
+  const description =
+    doc.description || `${doc.title} — ${companyName} documentation for the enterprise MCP platform.`;
   const imageUrl = `${origin}/docs/${doc.slug}/opengraph-image`;
   const imageAlt = `${doc.title} | ${companyName} Docs`;
 
   return {
-    title: `${doc.title} | ${companyName} Docs`,
+    title: `${doc.title} | Docs`,
     description,
     metadataBase: new URL(origin),
     alternates: {

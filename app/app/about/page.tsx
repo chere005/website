@@ -14,7 +14,6 @@ const {
   company: {
     name: companyName,
     alternateName: companyAlternateName,
-    description: companyDescription,
     people: {
       joey: JOEY,
       matvey: MATVEY,
@@ -60,7 +59,7 @@ function ArsenyDescription() {
 
 export const metadata: Metadata = {
   title: TITLE,
-  description: companyDescription,
+  description: DESCRIPTION,
   keywords: [`${companyName} team`, `about ${companyName}`, ...websiteKeywords],
   openGraph: {
     title: TITLE,

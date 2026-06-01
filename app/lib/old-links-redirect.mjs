@@ -73,4 +73,9 @@ export const oldLinksRedirects = [
     destination: '/docs/platform-identity-providers',
     permanent: true,
   },
+  {
+    source: '/docs/platform-cost-management',
+    destination: '/docs/platform-costs-and-limits',
+    permanent: true,
+  },
 ];

@@ -161,7 +161,7 @@ describe('buildDocMetadata', () => {
     };
     const metadata = buildDocMetadata(docWithoutDescription, origin, companyName);
 
-    const expectedDescription = `${mockDoc.title} documentation for ${companyName}.`;
+    const expectedDescription = `${mockDoc.title} — ${companyName} documentation for the enterprise MCP platform.`;
     expect(metadata.description).toBe(expectedDescription);
     expect(metadata.openGraph?.description).toBe(expectedDescription);
     expect(metadata.twitter?.description).toBe(expectedDescription);
