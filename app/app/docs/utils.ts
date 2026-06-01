@@ -24,8 +24,7 @@ export function buildDocMetadata(doc: DocPage | undefined, origin: string, compa
     };
   }
 
-  const description =
-    doc.description || `${doc.title} — ${companyName} documentation for the enterprise MCP platform.`;
+  const description = doc.description || `${doc.title} — ${companyName} documentation for the enterprise MCP platform.`;
   const imageUrl = `${origin}/docs/${doc.slug}/opengraph-image`;
   const imageAlt = `${doc.title} | ${companyName} Docs`;
 
