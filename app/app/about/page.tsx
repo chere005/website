@@ -15,13 +15,48 @@ const {
     name: companyName,
     alternateName: companyAlternateName,
     description: companyDescription,
-    people: { joey: JOEY, matvey: MATVEY, ildar: ILDAR, innokentii: INNOKENTII, alexander: ALEXANDER },
+    people: {
+      joey: JOEY,
+      matvey: MATVEY,
+      ildar: ILDAR,
+      innokentii: INNOKENTII,
+      alexander: ALEXANDER,
+      arseny: ARSENY,
+      margaret: MARGARET,
+    },
   },
 } = constants;
 
 const TITLE = 'About Us | Team & Mission';
-const DESCRIPTION =
-  'Meet the founding team from Grafana Labs and Elastic building the enterprise-grade MCP platform for AI agents.';
+const DESCRIPTION = 'Meet the team building the enterprise-grade MCP platform for AI agents.';
+const ARSENY_BOOK_TITLE = 'Machine Learning System Design';
+const ARSENY_BOOK_URL = 'https://arseny.info/ml_design_book';
+
+function ArsenyDescription() {
+  const bookTitleIndex = ARSENY.description.indexOf(ARSENY_BOOK_TITLE);
+
+  if (bookTitleIndex === -1) {
+    return <>{ARSENY.description}</>;
+  }
+
+  const beforeBookTitle = ARSENY.description.slice(0, bookTitleIndex);
+  const afterBookTitle = ARSENY.description.slice(bookTitleIndex + ARSENY_BOOK_TITLE.length);
+
+  return (
+    <>
+      {beforeBookTitle}
+      <a
+        href={ARSENY_BOOK_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 hover:text-blue-800 underline underline-offset-2"
+      >
+        {ARSENY_BOOK_TITLE}
+      </a>
+      {afterBookTitle}
+    </>
+  );
+}
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -229,6 +264,72 @@ export default function AboutPage() {
                   <div className="flex justify-center gap-3 mt-3">
                     <a
                       href={ALEXANDER.sameAs}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 hover:text-blue-600 transition-colors"
+                    >
+                      <LinkedInIcon size={20} />
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* arseny */}
+              <Card className="border-2 hover:border-cyan-200 transition-colors">
+                <CardContent className="p-6 text-left">
+                  <div className="flex justify-center mb-4">
+                    <Image
+                      src="/team/arseny.jpg"
+                      alt={ARSENY.name}
+                      width={150}
+                      height={150}
+                      className="rounded-full object-cover"
+                    />
+                  </div>
+                  <h3 className="font-bold text-xl mb-2">{ARSENY.name}</h3>
+                  <p className="text-gray-700 font-medium mb-1">{ARSENY.jobTitle}</p>
+                  <p className="text-gray-500 text-sm mb-3">
+                    {ARSENY.address.addressLocality}, {ARSENY.address.addressCountry}
+                  </p>
+                  <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                    <ArsenyDescription />
+                  </p>
+                  <EmailCodePanel email="arseny@archestra.ai" />
+                  <div className="flex justify-center gap-3 mt-3">
+                    <a
+                      href={ARSENY.sameAs}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 hover:text-blue-600 transition-colors"
+                    >
+                      <LinkedInIcon size={20} />
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* margaret */}
+              <Card className="border-2 hover:border-pink-200 transition-colors">
+                <CardContent className="p-6 text-left">
+                  <div className="flex justify-center mb-4">
+                    <Image
+                      src="/team/margaret.jpg"
+                      alt={MARGARET.name}
+                      width={150}
+                      height={150}
+                      className="rounded-full object-cover"
+                    />
+                  </div>
+                  <h3 className="font-bold text-xl mb-2">{MARGARET.name}</h3>
+                  <p className="text-gray-700 font-medium mb-1">{MARGARET.jobTitle}</p>
+                  <p className="text-gray-500 text-sm mb-3">
+                    {MARGARET.address.addressLocality}, {MARGARET.address.addressCountry}
+                  </p>
+                  <p className="text-gray-700 text-sm leading-relaxed mb-4">{MARGARET.description}</p>
+                  <EmailCodePanel email="margaret@archestra.ai" />
+                  <div className="flex justify-center gap-3 mt-3">
+                    <a
+                      href={MARGARET.sameAs}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-500 hover:text-blue-600 transition-colors"

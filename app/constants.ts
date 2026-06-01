@@ -62,23 +62,6 @@ const JOEY = {
   },
   description: 'Second-time founder. Experienced engineer. Harvard/McGill biochemist in past life.',
 };
-const DOMINIK = {
-  '@type': 'Person',
-  name: 'Dominik Broj',
-  jobTitle: 'Founding Engineer',
-  worksFor: {
-    '@type': 'Organization',
-    name: COMPANY_NAME,
-  },
-  sameAs: 'https://www.linkedin.com/in/dominikbroj/',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Wrocław',
-    addressCountry: 'Poland',
-  },
-  description: 'Software engineer with 10+ years of experience.',
-};
-
 const INNOKENTII = {
   '@type': 'Person',
   name: 'Innokentii Konstantinov',
@@ -114,13 +97,50 @@ const ALEXANDER = {
   description: 'Engineer. Cut his teeth in FinTech and eCommerce. Now middle-managing AI agents.',
 };
 
+const ARSENY = {
+  '@type': 'Person',
+  name: 'Arseny Kravchenko',
+  jobTitle: 'Founding AI Engineer',
+  worksFor: {
+    '@type': 'Organization',
+    name: COMPANY_NAME,
+  },
+  sameAs: 'https://www.linkedin.com/in/arsenyinfo/',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Warsaw',
+    addressCountry: 'Poland',
+  },
+  description:
+    'Over 10 years in applied AI/ML, from on-device AR try-on at WANNABY (acquired by Farfetch) to AI agents at Neon (acquired by Databricks). Author of the Machine Learning System Design book.',
+};
+
+const MARGARET = {
+  '@type': 'Person',
+  name: 'Margaret Rimek',
+  jobTitle: 'Founding Marketer',
+  worksFor: {
+    '@type': 'Organization',
+    name: COMPANY_NAME,
+  },
+  sameAs: 'https://www.linkedin.com/in/margaret-rimek/',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Lisbon',
+    addressCountry: 'Portugal',
+  },
+  description:
+    'Previously spent nearly five years at Metabase building developer marketing programs and partnerships, and co-founded a hardware startup. Works at the intersection of open source, AI infrastructure, and developer communities.',
+};
+
 const PEOPLE = {
   matvey: MATVEY,
   ildar: ILDAR,
   joey: JOEY,
-  dominik: DOMINIK,
   innokentii: INNOKENTII,
   alexander: ALEXANDER,
+  arseny: ARSENY,
+  margaret: MARGARET,
 };
 
 // GitHub constants
