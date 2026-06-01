@@ -278,6 +278,38 @@ export default function Home() {
                     >
                       - ChatGPT Operator (Feb 2025)
                     </a>
+                    <a
+                      href="https://www.hackthebox.com/blog/cve-2025-32711-echoleak-copilot-vulnerability"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-700 hover:text-red-600 transition-colors"
+                    >
+                      - Microsoft 365 Copilot &quot;EchoLeak&quot; (Jun 2025)
+                    </a>
+                    <a
+                      href="https://thehackernews.com/2025/09/shadowleak-zero-click-flaw-leaks-gmail.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-700 hover:text-red-600 transition-colors"
+                    >
+                      - ChatGPT Deep Research &quot;ShadowLeak&quot; (Sep 2025)
+                    </a>
+                    <a
+                      href="https://breached.company/the-lethal-trifecta-strikes-four-major-ai-agent-vulnerabilities-in-five-days/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-700 hover:text-red-600 transition-colors"
+                    >
+                      - Notion AI (Jan 2026)
+                    </a>
+                    <a
+                      href="https://breached.company/the-lethal-trifecta-strikes-four-major-ai-agent-vulnerabilities-in-five-days/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-700 hover:text-red-600 transition-colors"
+                    >
+                      - Claude Cowork (Jan 2026)
+                    </a>
                   </div>
                 </div>
 
