@@ -143,12 +143,12 @@ export default async function BlogPostPage({ params }: Props) {
                       alt={post.title}
                       width={post.imageWidth}
                       height={post.imageHeight}
-                      className="w-full h-auto rounded-lg shadow-lg"
+                      className="w-full h-auto rounded-lg"
                       sizes="(min-width: 1280px) 896px, (min-width: 768px) calc(100vw - 96px), calc(100vw - 32px)"
                       priority
                     />
                   ) : (
-                    <img src={post.image} alt={post.title} className="w-full rounded-lg shadow-lg" />
+                    <img src={post.image} alt={post.title} className="w-full rounded-lg" />
                   )}
                 </div>
               )}

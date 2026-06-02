@@ -351,159 +351,325 @@ export default function AboutPage() {
                 <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider text-center mb-6">
                   Venture Capital Partners
                 </p>
-                <div className="flex flex-wrap justify-center gap-2">
-                  {/* Lead Investor - Concept Ventures */}
-                  <a
-                    href="https://www.conceptventures.vc/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-lg px-4 py-3 flex flex-col items-center justify-center hover:opacity-90 transition-opacity flex-shrink-0 relative overflow-hidden"
-                    style={{ backgroundColor: '#2069f7' }}
-                  >
-                    <div
-                      className="absolute top-4 -left-6 bg-white text-black text-xs font-bold px-7 py-1 transform -rotate-45 shadow-sm"
-                      style={{ lineHeight: '1' }}
+                <div className="space-y-8">
+                  {/* Lead Seed - 20VC */}
+                  <div className="flex justify-center">
+                    <a
+                      href="https://20vc.fund/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-lg px-16 py-10 flex flex-col items-center justify-center hover:opacity-90 transition-opacity flex-shrink-0 relative overflow-hidden"
+                      style={{ backgroundColor: '#000000' }}
                     >
-                      Leading
-                    </div>
-                    <Image src="/logo_concept.svg" alt="Concept Ventures" width={80} height={27} className="h-auto" />
-                    <p className="text-white text-center mt-2 text-sm font-medium">Concept Ventures</p>
-                  </a>
+                      <div
+                        className="absolute top-6 -left-10 bg-white text-black text-sm font-bold px-10 py-1 transform -rotate-45 shadow-sm"
+                        style={{ lineHeight: '1' }}
+                      >
+                        Leading Seed
+                      </div>
+                      <Image src="/logo_20vc.svg" alt="20VC" width={200} height={67} className="h-auto" />
+                    </a>
+                  </div>
 
-                  <a
-                    href="https://zeroprime.vc/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-lg px-4 py-3 flex flex-col items-center justify-center hover:opacity-90 transition-opacity flex-shrink-0"
-                    style={{ backgroundColor: 'rgb(14, 30, 40)' }}
-                  >
-                    <Image
-                      src="/logo_zero_prime.jpeg"
-                      alt="Zero Prime Ventures"
-                      width={80}
-                      height={27}
-                      className="h-auto"
-                    />
-                    <p className="text-white text-center mt-2 text-sm font-medium">Zero Prime Ventures</p>
-                  </a>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {/* Lead Pre-Seed - Concept Ventures */}
+                    <a
+                      href="https://www.conceptventures.vc/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-lg w-44 h-44 flex flex-col items-center justify-center hover:opacity-90 transition-opacity flex-shrink-0 relative overflow-hidden"
+                      style={{ backgroundColor: '#2069f7' }}
+                    >
+                      <div
+                        className="absolute top-5 -left-9 bg-white text-black text-xs font-bold px-8 py-1 transform -rotate-45 shadow-sm"
+                        style={{ lineHeight: '1' }}
+                      >
+                        Leading Pre-Seed
+                      </div>
+                      <Image
+                        src="/logo_concept.svg"
+                        alt="Concept Ventures"
+                        width={110}
+                        height={37}
+                        className="h-auto"
+                      />
+                      <p className="text-white text-center mt-3 text-sm font-medium">Concept Ventures</p>
+                    </a>
 
-                  <a
-                    href="https://www.celeroventures.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-400 transition-colors flex flex-col items-center justify-center flex-shrink-0"
-                  >
-                    <Image src="/logo_celero.png" alt="Celero Ventures" width={80} height={27} className="h-auto" />
-                    <p className="text-gray-700 text-center mt-2 text-sm font-medium">Celero Ventures</p>
-                  </a>
+                    <a
+                      href="https://zeroprime.vc/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-lg w-44 h-44 flex flex-col items-center justify-center hover:opacity-90 transition-opacity flex-shrink-0"
+                      style={{ backgroundColor: 'rgb(14, 30, 40)' }}
+                    >
+                      <Image
+                        src="/logo_zero_prime.jpeg"
+                        alt="Zero Prime Ventures"
+                        width={110}
+                        height={37}
+                        className="h-auto"
+                      />
+                      <p className="text-white text-center mt-3 text-sm font-medium">Zero Prime Ventures</p>
+                    </a>
 
-                  <a
-                    href="https://rtp.vc/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-400 transition-colors flex items-center justify-center flex-shrink-0"
-                  >
-                    <Image src="/logo_rtp.svg" alt="RTP Global" width={120} height={40} className="h-auto" />
-                  </a>
-
-                  <a
-                    href="https://www.aloniq.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white rounded-lg px-4 border border-gray-200 hover:border-gray-400 transition-colors flex items-center justify-center flex-shrink-0"
-                    style={{ paddingTop: '26px', paddingBottom: '26px' }}
-                  >
-                    <Image src="/logo_aloniq.svg" alt="Aloniq" width={120} height={40} className="h-auto" />
-                  </a>
+                    <a
+                      href="https://www.celeroventures.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white rounded-lg w-44 h-44 border border-gray-200 hover:border-gray-400 transition-colors flex flex-col items-center justify-center flex-shrink-0"
+                    >
+                      <Image src="/logo_celero.png" alt="Celero Ventures" width={110} height={37} className="h-auto" />
+                      <p className="text-gray-700 text-center mt-3 text-sm font-medium">Celero Ventures</p>
+                    </a>
+                  </div>
                 </div>
               </div>
 
               {/* Angel Investors */}
               <div>
                 <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider text-center mb-4">
-                  Angel Investors
+                  Angels and Followers
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-                  <div className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors">
+                  <a
+                    href="https://www.linkedin.com/in/willwuuu/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium">Max Hauser</p>
-                        <p className="text-sm text-gray-600">Managing Director & Partner, BCG</p>
+                        <p className="font-medium">20 Product</p>
+                        <p className="text-sm text-gray-600">
+                          By Will Wu, CPO at Match Group, former VP Product at Snap
+                        </p>
                       </div>
-                      <a
-                        href="https://www.linkedin.com/in/hausermax/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-blue-600 transition-colors ml-3"
-                      >
-                        <LinkedInIcon size={18} />
-                      </a>
                     </div>
-                  </div>
-                  <div className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors">
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/berriche/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium">Maxim Konovalov</p>
-                        <p className="text-sm text-gray-600">Co-founder, Nginx</p>
+                        <p className="font-medium">Alexandre Berriche</p>
+                        <p className="text-sm text-gray-600">Founder, Fleet</p>
                       </div>
-                      <a
-                        href="https://www.linkedin.com/in/maxim/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-blue-600 transition-colors ml-3"
-                      >
-                        <LinkedInIcon size={18} />
-                      </a>
                     </div>
-                  </div>
-                  <div className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors">
+                  </a>
+                  <a
+                    href="https://www.aloniq.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Aloniq</p>
+                        <p className="text-sm text-gray-600">By Mark Shmulevich, Founder & Managing Partner</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/dedutta/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Debo Dutta</p>
+                        <p className="text-sm text-gray-600">Chief AI Officer, Nutanix</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/kellydeclan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Declan Kelly</p>
+                        <p className="text-sm text-gray-600">Founder & GP, Foreword</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/gerhardeschelbeck/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Gerhard Eschelbeck</p>
+                        <p className="text-sm text-gray-600">Former CISO, Google</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://insiders.vc/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Insiders</p>
+                        <p className="text-sm text-gray-600">Cofounders of ESL FACEIT Group</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/kieranjflanagan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Kieran Flanagan</p>
+                        <p className="text-sm text-gray-600">CMO, HubSpot</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/kvinogradov/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-medium">Konstantin Vinogradov</p>
                         <p className="text-sm text-gray-600">GP, Runa Capital</p>
                       </div>
-                      <a
-                        href="https://www.linkedin.com/in/kvinogradov/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-blue-600 transition-colors ml-3"
-                      >
-                        <LinkedInIcon size={18} />
-                      </a>
                     </div>
-                  </div>
-                  <div className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">Stephen Whitworth</p>
-                        <p className="text-sm text-gray-600">CEO, incident.io</p>
-                      </div>
-                      <a
-                        href="https://www.linkedin.com/in/stephenwhitworth/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-blue-600 transition-colors ml-3"
-                      >
-                        <LinkedInIcon size={18} />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors">
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/luke-harries/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-medium">Luke Harries</p>
                         <p className="text-sm text-gray-600">Elevenlabs</p>
                       </div>
-                      <a
-                        href="https://www.linkedin.com/in/luke-harries/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-blue-600 transition-colors ml-3"
-                      >
-                        <LinkedInIcon size={18} />
-                      </a>
                     </div>
-                  </div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/mgoldberger/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Mark Goldberg</p>
+                        <p className="text-sm text-gray-600">VP Sales, Metaview</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/hausermax/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Max Hauser</p>
+                        <p className="text-sm text-gray-600">Managing Director & Partner, BCG</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/maxim/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Maxim Konovalov</p>
+                        <p className="text-sm text-gray-600">Co-founder, Nginx</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/olivierpomel/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Olivier Pomel</p>
+                        <p className="text-sm text-gray-600">CEO & Co-founder, Datadog</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://rtp.vc/team/galina-chifina/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">RTP Global</p>
+                        <p className="text-sm text-gray-600">By Galina Chifina, CEO & Partner</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/stephenwhitworth/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Stephen Whitworth</p>
+                        <p className="text-sm text-gray-600">CEO, incident.io</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.tenacity-cap.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Tenacity Capital</p>
+                        <p className="text-sm text-gray-600">By AJ Tennant, former VP Sales at Slack and Glean</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://visibleventures.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-lg px-4 py-3 border border-gray-200 hover:border-gray-300 transition-colors block"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Visible Ventures</p>
+                        <p className="text-sm text-gray-600">
+                          With Carolyn Everson, Senior Advisor at Permira, and Board Member at Coca-Cola and Disney
+                        </p>
+                      </div>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>
