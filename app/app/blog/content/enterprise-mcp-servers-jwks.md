@@ -54,26 +54,18 @@ When building enterprise MCP servers with third-party identity providers, there 
 
 The MCP server delegates authentication entirely to an external identity provider. The server never issues tokens — it only validates them.
 
-```
-  Client              IdP (Okta, Auth0)      MCP Server
-    │                       │                    │
-    │  1. Login             │                    │
-    │──────────────────────>│                    │
-    │                       │                    │
-    │  2. JWT token         │                    │
-    │<──────────────────────│                    │
-    │                       │                    │
-    │  3. MCP request + Bearer JWT               │
-    │───────────────────────────────────────────>│
-    │                       │                    │
-    │                       │  4. Fetch JWKS     │
-    │                       │<───────────────────│
-    │                       │                    │
-    │                       │  5. Public keys    │
-    │                       │───────────────────>│
-    │                       │                    │
-    │  6. Verified response                      │
-    │<───────────────────────────────────────────│
+```mermaid
+sequenceDiagram
+    participant Client
+    participant IdP as IdP (Okta, Auth0)
+    participant MCP as MCP Server
+
+    Client->>IdP: 1. Login
+    IdP-->>Client: 2. JWT token
+    Client->>MCP: 3. MCP request + Bearer JWT
+    MCP->>IdP: 4. Fetch JWKS
+    IdP-->>MCP: 5. Public keys
+    MCP-->>Client: 6. Verified response
 ```
 
 The MCP server:
@@ -92,31 +84,20 @@ The MCP server:
 
 The MCP server runs its own OAuth authorization server. It issues tokens, manages user sessions, and publishes its own JWKS endpoint.
 
-```
-  Client                MCP Server
-    │                ┌──────────────────┐
-    │                │  OAuth Server    │
-    │                │  • /authorize    │
-    │                │  • /token        │
-    │                │  • /.well-known/ │
-    │                │  • /jwks         │
-    │                ├──────────────────┤
-    │                │  MCP Handlers    │
-    │                │  • tools/list    │
-    │                │  • tools/call    │
-    │                └──────────────────┘
-    │                        │
-    │  1. Discover auth      │
-    │───────────────────────>│
-    │                        │
-    │  2. OAuth flow         │
-    │<──────────────────────>│
-    │                        │
-    │  3. MCP request + JWT  │
-    │───────────────────────>│
-    │                        │
-    │  4. Response           │
-    │<───────────────────────│
+```mermaid
+flowchart LR
+    Client[Client]
+
+    subgraph MCP["MCP Server"]
+        OAuth["OAuth Server<br/>/authorize<br/>/token<br/>/.well-known/<br/>/jwks"]
+        Handlers["MCP Handlers<br/>tools/list<br/>tools/call"]
+        OAuth --> Handlers
+    end
+
+    Client -->|"1. Discover auth"| OAuth
+    Client <-->|"2. OAuth flow"| OAuth
+    Client -->|"3. MCP request + JWT"| Handlers
+    Handlers -->|"4. Response"| Client
 ```
 
 **Best for:** Standalone MCP servers or products that need full control over the auth experience. The server owns user management and token issuance.
@@ -331,25 +312,21 @@ This is the **gateway-terminated auth** pattern, and it's how most enterprise de
 
 There's a hybrid pattern that combines gateway convenience with end-to-end identity verification. Instead of terminating auth at the gateway and connecting to upstream servers with separate credentials, the gateway **propagates the caller's original JWT** to the upstream MCP server:
 
-```
-  Client              Gateway             IdP (JWKS)         MCP Server
-    |                    |                     |                  |
-    |  JWT from IdP      |                     |                  |
-    |------------------>|                     |                  |
-    |                    |  Validate JWT       |                  |
-    |                    |-------------------->|                  |
-    |                    |  Valid              |                  |
-    |                    |<--------------------|                  |
-    |                    |                     |                  |
-    |                    |  Forward JWT                           |
-    |                    |--------------------------------------->|
-    |                    |                     |  Validate JWT    |
-    |                    |                     |<-----------------|
-    |                    |                     |  Valid           |
-    |                    |                     |----------------->|
-    |                    |                     |                  |
-    |  Tool result       |                     |                  |
-    |<-------------------|                     |                  |
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Gateway
+    participant IdP as IdP (JWKS)
+    participant MCP as MCP Server
+
+    Client->>Gateway: JWT from IdP
+    Gateway->>IdP: Validate JWT
+    IdP-->>Gateway: Valid
+    Gateway->>MCP: Forward JWT
+    MCP->>IdP: Validate JWT
+    IdP-->>MCP: Valid
+    MCP-->>Gateway: Tool result
+    Gateway-->>Client: Tool result
 ```
 
 The gateway validates the JWT and enforces access control (team membership, user matching). The upstream MCP server independently validates the same JWT against the IdP's JWKS endpoint and extracts user identity from the claims — roles, groups, email — without any gateway-specific integration.
