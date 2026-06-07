@@ -191,14 +191,47 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="max-w-3xl mx-auto text-left">
               <BlogContent content={post.content} />
               {post.author.trim() !== 'Mack Chi' && (
-                <aside className="mt-12 rounded-xl border border-gray-200 bg-gray-100 p-6 text-lg leading-relaxed text-gray-700">
-                  <a href="https://archestra.ai" className="font-semibold text-teal-700 hover:underline">
+                <aside className="mt-12 rounded-xl border border-gray-300 bg-gray-200 p-6 text-lg leading-relaxed text-gray-700">
+                  <a href="https://archestra.ai" className="font-semibold text-gray-800 underline hover:text-gray-950">
                     Archestra
                   </a>{' '}
-                  is an open-source control plane for running AI agents safely in production. It runs self-hosted in
-                  your own Kubernetes cluster, putting a deterministic policy gateway between your agents and your
-                  stack. Every LLM call, tool invocation, and external request gets governed with RBAC, credential
-                  isolation, audit trails, and cost controls. Built by the ex-Grafana team.
+                  is an open-source control plane for running AI agents safely in production. It runs{' '}
+                  <a href="/docs/platform-deployment" className="text-gray-800 underline hover:text-gray-950">
+                    self-hosted in your own Kubernetes cluster
+                  </a>
+                  , putting a{' '}
+                  <a href="/docs/platform-ai-tool-guardrails" className="text-gray-800 underline hover:text-gray-950">
+                    deterministic policy gateway
+                  </a>{' '}
+                  between your agents and your stack. Every{' '}
+                  <a href="/docs/platform-llm-proxy" className="text-gray-800 underline hover:text-gray-950">
+                    LLM call
+                  </a>
+                  ,{' '}
+                  <a href="/docs/platform-ai-tool-guardrails" className="text-gray-800 underline hover:text-gray-950">
+                    tool invocation
+                  </a>
+                  , and{' '}
+                  <a href="/docs/platform-mcp-gateway" className="text-gray-800 underline hover:text-gray-950">
+                    external request
+                  </a>{' '}
+                  gets governed with{' '}
+                  <a href="/docs/platform-access-control" className="text-gray-800 underline hover:text-gray-950">
+                    RBAC
+                  </a>
+                  ,{' '}
+                  <a href="/docs/platform-secrets-management" className="text-gray-800 underline hover:text-gray-950">
+                    credential isolation
+                  </a>
+                  ,{' '}
+                  <a href="/docs/platform-observability" className="text-gray-800 underline hover:text-gray-950">
+                    audit trails
+                  </a>
+                  , and{' '}
+                  <a href="/docs/platform-costs-and-limits" className="text-gray-800 underline hover:text-gray-950">
+                    cost controls
+                  </a>
+                  . Built by the ex-Grafana team.
                 </aside>
               )}
             </div>
