@@ -195,10 +195,43 @@ export default async function BlogPostPage({ params }: Props) {
                   <a href="https://archestra.ai" className="font-semibold text-teal-700 hover:underline">
                     Archestra
                   </a>{' '}
-                  is an open-source control plane for running AI agents safely in production. It runs self-hosted in
-                  your own Kubernetes cluster, putting a deterministic policy gateway between your agents and your
-                  stack. Every LLM call, tool invocation, and external request gets governed with RBAC, credential
-                  isolation, audit trails, and cost controls. Built by the ex-Grafana team.
+                  is an open-source control plane for running AI agents safely in production. It runs{' '}
+                  <a href="/docs/platform-deployment" className="text-teal-700 hover:underline">
+                    self-hosted in your own Kubernetes cluster
+                  </a>
+                  , putting a{' '}
+                  <a href="/docs/platform-ai-tool-guardrails" className="text-teal-700 hover:underline">
+                    deterministic policy gateway
+                  </a>{' '}
+                  between your agents and your stack. Every{' '}
+                  <a href="/docs/platform-llm-proxy" className="text-teal-700 hover:underline">
+                    LLM call
+                  </a>
+                  ,{' '}
+                  <a href="/docs/platform-ai-tool-guardrails" className="text-teal-700 hover:underline">
+                    tool invocation
+                  </a>
+                  , and{' '}
+                  <a href="/docs/platform-mcp-gateway" className="text-teal-700 hover:underline">
+                    external request
+                  </a>{' '}
+                  gets governed with{' '}
+                  <a href="/docs/platform-access-control" className="text-teal-700 hover:underline">
+                    RBAC
+                  </a>
+                  ,{' '}
+                  <a href="/docs/platform-secrets-management" className="text-teal-700 hover:underline">
+                    credential isolation
+                  </a>
+                  ,{' '}
+                  <a href="/docs/platform-observability" className="text-teal-700 hover:underline">
+                    audit trails
+                  </a>
+                  , and{' '}
+                  <a href="/docs/platform-costs-and-limits" className="text-teal-700 hover:underline">
+                    cost controls
+                  </a>
+                  . Built by the ex-Grafana team.
                 </aside>
               )}
             </div>
