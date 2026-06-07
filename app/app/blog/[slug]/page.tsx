@@ -190,6 +190,17 @@ export default async function BlogPostPage({ params }: Props) {
 
             <div className="max-w-3xl mx-auto text-left">
               <BlogContent content={post.content} />
+              {post.author.trim() !== 'Mack Chi' && (
+                <aside className="mt-12 rounded-xl border border-gray-200 bg-gray-100 p-6 text-lg leading-relaxed text-gray-700">
+                  <a href="https://archestra.ai" className="font-semibold text-teal-700 hover:underline">
+                    Archestra
+                  </a>{' '}
+                  is an open-source control plane for running AI agents safely in production. It runs self-hosted in
+                  your own Kubernetes cluster, putting a deterministic policy gateway between your agents and your
+                  stack. Every LLM call, tool invocation, and external request gets governed with RBAC, credential
+                  isolation, audit trails, and cost controls. Built by the ex-Grafana team.
+                </aside>
+              )}
             </div>
           </article>
         </div>

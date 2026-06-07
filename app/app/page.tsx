@@ -66,7 +66,7 @@ export default function Home() {
                   </span>
                   .
                 </h1>
-                <div className="mt-8 flex justify-center lg:justify-start">
+                <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-3">
                   <a
                     href="https://github.com/archestra-ai/archestra"
                     target="_blank"
@@ -81,6 +81,19 @@ export default function Home() {
                   >
                     <GitHubIcon className="w-5 h-5" />
                     Self-Host for Free
+                  </a>
+                  <a
+                    href="https://archestra.ai/book-demo"
+                    onClick={() =>
+                      phClient?.capture('hero_cta_clicked', {
+                        label: 'book_demo',
+                        destination: 'book_demo',
+                      })
+                    }
+                    className="inline-flex items-center gap-2.5 px-6 py-3 bg-white hover:bg-gray-50 text-gray-900 font-semibold rounded-lg border border-gray-300 transition-colors shadow-sm text-base"
+                  >
+                    <Calendar className="w-5 h-5" />
+                    Book demo
                   </a>
                 </div>
               </div>
