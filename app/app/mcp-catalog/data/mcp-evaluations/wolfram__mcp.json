@@ -1,0 +1,47 @@
+{
+  "name": "wolfram__mcp",
+  "display_name": "Wolfram MCP",
+  "description": "Remote MCP server for Wolfram - computational intelligence, math, science, and data analysis via WolframAlpha and Wolfram Language",
+  "oauth_config": null,
+  "tools": [
+    {
+      "name": "WolframAlpha",
+      "description": "Query WolframAlpha for computations, facts, and data analysis"
+    },
+    {
+      "name": "WolframLanguageEvaluator",
+      "description": "Evaluate Wolfram Language code for advanced symbolic and numerical computation"
+    },
+    {
+      "name": "WolframContext",
+      "description": "Access Wolfram context and knowledge base"
+    }
+  ],
+  "prompts": [],
+  "user_config": {},
+  "readme": null,
+  "category": "AI Tools",
+  "quality_score": 80,
+  "archestra_config": {
+    "client_config_permutations": null,
+    "oauth": {
+      "provider": null,
+      "required": false
+    },
+    "works_in_archestra": true
+  },
+  "framework": null,
+  "last_scraped_at": "2026-06-08T00:00:00.000Z",
+  "evaluation_model": null,
+  "raw_dependencies": null,
+  "author": {
+    "name": "wolfram"
+  },
+  "server": {
+    "type": "remote",
+    "url": "https://agenttools.wolfram.com/mcp",
+    "docs_url": "https://www.wolfram.com/artificial-intelligence/mcp-service/wolfram-mcp-cloud/"
+  },
+  "github_info": null,
+  "programming_language": null
+}
