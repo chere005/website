@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, X } from 'lucide-react';
+import { ArrowUpRight, MapPin, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -21,6 +21,28 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/85 backdrop-blur-md">
+      <div className="border-b border-teal-700 bg-teal-600 text-white">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-wrap items-center justify-center gap-x-4 gap-y-2 px-5 py-2.5 text-center sm:px-8 lg:px-14">
+          <div className="flex items-center gap-2 text-sm">
+            <MapPin className="hidden h-4 w-4 shrink-0 text-teal-100 sm:block" />
+            <p>
+              <span className="font-semibold">We&apos;re heading to KubeCon Mumbai</span>
+              <span className="mx-2 text-teal-200">·</span>
+              <span className="text-teal-50">June 18–19</span>
+            </p>
+          </div>
+          <a
+            href="https://form.typeform.com/to/prOE2Cxf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 rounded-full border border-white/40 bg-white px-3 py-1 text-sm font-semibold text-teal-800 shadow-sm transition-colors hover:bg-teal-50"
+          >
+            Let&apos;s meet
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
+      </div>
+
       <div className="mx-auto flex h-16 w-full max-w-[1320px] items-center gap-6 px-5 sm:px-8 lg:px-14">
         <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
           <div className="relative h-[28px] w-[28px] shrink-0">
